@@ -144,7 +144,9 @@ class ParoluWindow(Adw.ApplicationWindow):
         for voice in voices:
             model.append(voice['name'])
             print ('Namen der Stimme voice[name]  = ', voice['name'])
-        model.append("Andere Stimme herunterladen...")
+
+        if lang_code != "eo":  # für Esperanto gibt es aktuell keine Stimmen
+            model.append("Stimme herunterladen...")
 
         self.voice_chooser.set_model(model)
         self.voice_chooser.set_selected(0)   # stellt Auswahlfenster auf die erste Zeile
