@@ -14,14 +14,16 @@
         <child type="top">
           <object class="AdwHeaderBar" id="header_bar">
             <child type="start">
-              <object class="GtkButton" id="open_button">
-                <property name="label">Open</property>
-                <property name="action-name">win.open</property>
-              </object>
+            <object class="GtkButton" id="open_button">
+              <property name="icon-name">document-open</property>
+              <property name="tooltip-text">Öffnen einer Text-Datei</property>
+              <property name="action-name">win.open</property>
+            </object>
             </child>
-            <child >
+            <child>
               <object class="GtkButton" id="save_text_button">
-                <property name="label">Save-text</property>
+                <property name="icon-name">document-save</property>
+                <property name="tooltip-text">Speichern des Texts</property>
                 <property name="action-name">win.save-as</property>
               </object>
             </child>
