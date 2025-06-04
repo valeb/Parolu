@@ -53,7 +53,7 @@ class ParoluWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.pitch_chooser.set_selected(4)
+        # self.pitch_chooser.set_selected(4)
         self.speed_chooser.set_selected(4)
         # die Aktion zum Öffnen einer Datei wird hinzugefügt
         open_action = Gio.SimpleAction(name="open")
