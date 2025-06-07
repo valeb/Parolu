@@ -78,9 +78,6 @@ class ParoluWindow(Adw.ApplicationWindow):
         save_audio_action.connect("activate", self.save_audio_dialog)
         self.add_action(save_audio_action)
 
-        #die Aktion zum Laden Speichern des Texts wird hinzugefügt
-        #self.save_text_button.connect('clicked', self.save_text_dialog)
-
         #die Aktion zum Hören des Texts wird hinzugefügt
         self.read_button.connect('clicked', self.read_text)
 
@@ -142,8 +139,9 @@ class ParoluWindow(Adw.ApplicationWindow):
         selected = dropdown.get_selected()
         model = dropdown.get_model()
         print ('$$$$$$$$$$$$$ in on voice changed  ', model)
-        if selected == model.get_n_items() - 1:  # "Andere Stimme..." ausgewählt
-            self._show_voice_download_dialog()
+        if selected == model.get_n_items() - 1:  # letzte Zeile ausgewählt
+            if self.lang_code != "eo":
+                self._show_voice_download_dialog()
 
     def _update_voice_chooser(self, lang_code):
         """Aktualisiert die Dropdown-Auswahl"""

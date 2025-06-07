@@ -86,7 +86,7 @@
                     </child>
                     <child>
                       <object class="GtkLabel" id="label_1">
-                        <property name="label">× 80.0</property>
+                        <property name="label">× 1.0</property>
                       </object>
                     </child>
                   </object>
@@ -110,9 +110,9 @@
                             <property name="adjustment">
                               <object class="GtkAdjustment" id="adjustment_1">
                                 <property name="step-increment">0.5</property>
-                                <property name="lower">50</property>
-                                <property name="upper">150</property>
-                                <property name="value">80</property>
+                                <property name="lower">0.4</property>
+                                <property name="upper">2</property>
+                                <property name="value">1</property>
                               </object>
                             </property>
                             <signal name="change-value" handler="scale_change_value_cb"/>
@@ -148,7 +148,7 @@
                     </child>
                     <child>
                       <object class="GtkLabel" id="label_2">
-                        <property name="label">× 100.0</property>
+                        <property name="label">× 1.0</property>
                       </object>
                     </child>
                   </object>
@@ -172,9 +172,9 @@
                             <property name="adjustment">
                               <object class="GtkAdjustment" id="adjustment_2">
                                 <property name="step-increment">0.5</property>
-                                <property name="lower">40</property>
-                                <property name="upper">200</property>
-                                <property name="value">100</property>
+                                <property name="lower">0.4</property>
+                                <property name="upper">2</property>
+                                <property name="value">1</property>
                               </object>
                             </property>
                             <signal name="change-value" handler="scale_change_value_cb"/>
@@ -199,14 +199,14 @@
 
             <child>
               <object class="GtkButton" id="read_button">
-                <property name="label" translatable="true">Read</property>
+                <property name="icon_name">media-playback-start-symbolic</property>
                 <property name="tooltip-text">Lesen des Texts</property>
               </object>
             </child>
             <child type="end">
               <object class="GtkButton" id="save_button">
                 <property name="tooltip-text">Speichern des Audios</property>
-                <property name="label" translatable="true">Save</property>
+                <property name="icon-name">document-save</property>
               </object>
             </child>
           </object>

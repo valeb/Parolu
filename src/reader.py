@@ -100,12 +100,12 @@ class Reader():
 
             self.p = piper.piper_api(model_path, config_path)   # Sythesizer
 
-            lenght_scale = 200/int(self.speed)  # verändert die Geschwindigkeit
+            lenght_scale = 1/self.speed  # verändert die Geschwindigkeit
 
             samples = self.p.text_to_audio(text, lenght_scale)
 
             # Audio abspielen
-            target_rate = int(pitch)*250   # verändert die Stimmlage
+            target_rate = pitch*22050   # verändert die Stimmlage
             wav_data = self._samples_to_wav(samples, target_rate)
             #self._play_wav(wav_data)
 
