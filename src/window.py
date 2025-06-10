@@ -113,6 +113,24 @@ class ParoluWindow(Adw.ApplicationWindow):
         self.lang_code = self.lang_map.get(lang_name, "en")
         print ('Sprachkodex am Beginn  ', self.lang_code)
 
+    def show_wait_dialog(self):
+        self.wait_dialog = Gtk.Dialog(
+            title="Synchronisierung",
+            transient_for=self,  # Korrekt: self ist das Hauptfenster
+            modal=True
+        )
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        box.append(Gtk.Label(label="Bitte warten..."))
+        self.spinner = Gtk.Spinner()
+        self.spinner.start()
+        box.append(self.spinner)
+        self.wait_dialog.set_child(box)
+        self.wait_dialog.show()
+
+    def hide_wait_dialog(self):
+        if hasattr(self, 'wait_dialog'):
+            self.wait_dialog.destroy()
+
     def _connect_signals(self):
         self.lang_chooser.connect("notify::selected", self._on_lang_changed)
         self.voice_chooser.connect("notify::selected", self._on_voice_changed)
@@ -435,7 +453,7 @@ class ParoluWindow(Adw.ApplicationWindow):
         selected_voice = self.voice_chooser.get_selected_item().get_string()
         print('Stimme', selected_voice)
 
-        self.read = Reader(text, engine, self.lang_code, selected_voice, pitch, speed)
+        self.read = Reader(text, engine, self.lang_code, selected_voice, pitch, speed, window=self)
 
 
 

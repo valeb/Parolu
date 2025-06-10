@@ -22,10 +22,12 @@ import shutil
 from pathlib import Path
 from .pipervoice import VoiceManager
 from .vocxpo import convert_text
+import threading
 
 class Reader():
       # Konstruktor, initialisiert Eingabewerte
-    def __init__(self, text, engine, lang_code, selected_voice, pitch, speed):
+    def __init__(self, text, engine, lang_code, selected_voice, pitch, speed, window=None):
+        self.window = window
         self.text = text
         self.engine = engine
         self.lang_code = lang_code  # de, it, eo, en
@@ -79,46 +81,67 @@ class Reader():
     def use_piper(self, text, lang_code, selected_voice, pitch, speed):  # Ausgabe über wav
         print(f"Starte Piper-Synthese für: '{text[:20]}...'")
 
+        # Warte-Dialog im Hauptthread anzeigen
+        GLib.idle_add(self.window.show_wait_dialog)
+
         voices = self.voicemanager.get_installed_voices(lang_code)
         for voice in voices:
             if voice['name'] == self.selected_voice:
                 voice_id = voice['id']
-        try:
-            # Modellpfade
-            # model_path = "/app/share/piper/de/de_DE-kerstin-low.onnx"
-            # config_path = "/app/share/piper/de/de_DE-kerstin-low.onnx.json"
 
-            #model_path, config_path = self.get_voice_path(lang_code, "de_DE-kerstin-low")
-            model_path, config_path = self.get_voice_path(lang_code, voice_id)
-            print(f"Verwende Modell: {model_path}")
+        def synthesize():
+            try:
+                self.window.show_wait_dialog()
 
-            if not (os.path.exists(model_path) and os.path.exists(config_path)):
-                print("❌ Modell oder Konfiguration fehlen")
-                return
+                model_path, config_path = self.get_voice_path(lang_code, voice_id)
+                print(f"Verwende Modell: {model_path}")
 
-            print(f"Starte Synthese mit: {model_path} (Existiert: {os.path.exists(model_path)})")
+                if not (os.path.exists(model_path) and os.path.exists(config_path)):
+                    print("❌ Modell oder Konfiguration fehlen")
+                    return
 
-            self.p = piper.piper_api(model_path, config_path)   # Sythesizer
+                print(f"Starte Synthese mit: {model_path} (Existiert: {os.path.exists(model_path)})")
 
-            lenght_scale = 1/self.speed  # verändert die Geschwindigkeit
+                self.p = piper.piper_api(model_path, config_path)   # Sythesizer
 
-            samples = self.p.text_to_audio(text, lenght_scale)
+                lenght_scale = 1/self.speed  # verändert die Geschwindigkeit
 
-            # Audio abspielen
-            target_rate = pitch*22050   # verändert die Stimmlage
-            wav_data = self._samples_to_wav(samples, target_rate)
-            #self._play_wav(wav_data)
+                samples = self.p.text_to_audio(text, lenght_scale)
 
-            with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as fp:
-                self.temp_path = fp.name  # Pfad zur temporären Datei merken
-                print ('Pfad zur temporären Datei  ', self.temp_path)
-                with open(self.temp_path, "wb") as f:
+                # wav Data erstellen
+                target_rate = pitch*22050   # verändert die Stimmlage
+                wav_data = self._samples_to_wav(samples, target_rate)
+
+                # Temporäre Datei erstellen
+                with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
                     f.write(wav_data)
-                self._play_audio_file(fp.name)
+                    temp_path = f.name
 
-        except Exception as e:
-            print(f"Piper Fehler (Typ: {type(e)}): {e}")
-            self._play_test_tone()
+                # Dialog schließen (BEVOR die Wiedergabe startet)
+                GLib.idle_add(self.window.hide_wait_dialog)
+
+                # Wiedergabe starten
+                GLib.idle_add(self._play_audio_file, temp_path)
+
+            except Exception as e:
+                GLib.idle_add(self.window.hide_wait_dialog)
+                GLib.idle_add(self._show_error, f"Synthese fehlgeschlagen: {str(e)}")
+
+        # Thread starten
+        threading.Thread(target=synthesize, daemon=True).start()
+
+    def _on_synthesis_done(self, wav_data):
+        self.window.hide_wait_dialog()
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
+            f.write(wav_data)
+            self._play_audio_file(f.name)
+
+                    #     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as fp:
+                    # self.temp_path = fp.name  # Pfad zur temporären Datei merken
+                    # print ('Pfad zur temporären Datei  ', self.temp_path)
+                    # with open(self.temp_path, "wb") as f:
+                    #     f.write(wav_data)
+                    # self._play_audio_file(fp.name)
 
 
     def save_audio_file(self, file):  # speichert Audio-File mit Auswahldialog
