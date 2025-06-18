@@ -63,6 +63,8 @@ class ParoluWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.is_playing = False
+
         # die Aktion zum Öffnen einer Datei wird hinzugefügt
         open_action = Gio.SimpleAction(name="open")
         open_action.connect("activate", self.open_file_dialog)
@@ -442,7 +444,6 @@ class ParoluWindow(Adw.ApplicationWindow):
 
     # Abspielen des Texts
     def read_text(self, button):
-
         print ('### Audio abspielen   ###')
         buffer = self.main_text_view.get_buffer()
 
@@ -465,7 +466,33 @@ class ParoluWindow(Adw.ApplicationWindow):
         selected_voice = self.voice_chooser.get_selected_item().get_string()
         print('Stimme', selected_voice)
 
-        self.reader = Reader(text, engine, self.lang_code, selected_voice, pitch, speed, window=self)
+        #self.reader = Reader(text, engine, self.lang_code, selected_voice, pitch, speed, window=self)
+        print ('is_playing:', self.is_playing)
+        if self.is_playing:
+            self.stop_playback(button)
+        else:
+            self.start_playback(button, text, engine, self.lang_code, selected_voice, pitch, speed)
 
+    # def _update_play_button(self):
+    #     print( """Sicherer UI-Update über GLib.idle_add""")
+    #     button = self.read_button
+    #     button.set_icon_name ("media-playback-stop-symbolic")
 
+    def start_playback(self, button, text, engine, lang_code, selected_voice, pitch, speed):
+        """Startet die Wiedergabe und aktualisier t UI"""
+        if not self.is_playing:
+            #self.read_text(button)  # Deine bestehende Methode
+            self.reader = Reader(text, engine, self.lang_code, selected_voice, pitch, speed, window=self)
+
+            self.is_playing = True
+            button.set_icon_name("media-playback-stop-symbolic")
+
+    def stop_playback(self, button):
+        """Stoppt die Wiedergabe und aktualisiert UI"""
+        if self.is_playing:
+            # Hier müsstest du den Reader stoppen - je nach Implementierung:
+            if hasattr(self, 'reader') and self.reader:
+                self.reader.stop_audio()  # Annahme: dein Reader hat eine stop()-Methode
+            self.is_playing = False
+            button.set_icon_name("media-playback-start-symbolic")
 

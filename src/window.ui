@@ -199,10 +199,12 @@
 
             <child>
               <object class="GtkButton" id="read_button">
-                <property name="icon_name">media-playback-start-symbolic</property>
+                <property name="icon-name">media-playback-start-symbolic</property>
                 <property name="tooltip-text">Lesen des Texts</property>
+                <signal name="clicked" handler="read_text" swapped="no"/>
               </object>
             </child>
+
             <child type="end">
               <object class="GtkButton" id="save_button">
                 <property name="tooltip-text">Speichern des Audios</property>

@@ -39,6 +39,7 @@ class Reader():
 
         self._dialog_ready = threading.Event()
         self._pipeline = None
+        self._current_pipeline = None
 
         print ('in reader erhaltener lang_code  ', self.lang_code)
 
@@ -149,6 +150,7 @@ class Reader():
             # Dialog schließen VOR Wiedergabe
             if hasattr(self, 'window') and self.window:
                 GLib.idle_add(self.window.hide_wait_dialog)
+                self.window.set_sensitive(True)
 
             # Wiedergabe mit Reaktivierungs-Callback starten
             GLib.idle_add(
@@ -179,37 +181,59 @@ class Reader():
         shutil.move(self.temp_path, file)  # verschiebt die temporäre Datei
 
     def _play_audio_file_async(self, file_path, callback=None):
-        """Nicht-blockierende GStreamer-Wiedergabe mit Callback"""
-        pipeline = Gst.parse_launch(
-            f"filesrc location={file_path} ! decodebin ! audioconvert ! audioresample ! autoaudiosink"
-        )
+        """Sichere Audio-Wiedergabe mit Fehlerbehandlung"""
+        try:
+            # 1. Vorherige Wiedergabe stoppen
+            self.stop_audio()
 
-        # Callback für Wiedergabe-Ende
-        bus = pipeline.get_bus()
-        bus.add_signal_watch()
-        bus.connect("message", self._on_gst_message, pipeline, file_path, callback)
+            # 2. Pipeline erstellen und prüfen
+            pipeline = Gst.parse_launch(
+                f"filesrc location={file_path} ! decodebin ! audioconvert ! audioresample ! autoaudiosink"
+            )
 
-        # Callback-Handler hinzufügen
-        bus.connect("message", self._on_gst_message, pipeline, file_path, callback)
+            if not pipeline:
+                raise RuntimeError("Pipeline creation failed")
 
-        pipeline.set_state(Gst.State.PLAYING)
+            # 3. Pipeline zuweisen NACH erfolgreicher Erstellung
+            self._current_pipeline = pipeline
 
-        # Pipeline als Instanzvariable speichern
-        self._current_pipeline = pipeline
+            # 4. Bus-Konfiguration
+            bus = pipeline.get_bus()
+            bus.add_signal_watch()
+            bus.connect("message",
+                   lambda bus, msg: self._on_gst_message(bus, msg, pipeline, file_path, callback))
+
+            # 5. Wiedergabe starten
+            ret = pipeline.set_state(Gst.State.PLAYING)
+            if ret == Gst.StateChangeReturn.FAILURE:
+                raise RuntimeError("Failed to set pipeline state")
+
+        except Exception as e:
+            print(f"Playback error: {e}")
+            self.stop_audio()  # Bereinigen
+            if callback:
+                GLib.idle_add(callback)
+
 
     def _on_gst_message(self, bus, message, pipeline, file_path, callback):
-        """Verarbeitet GStreamer-Nachrichten"""
-        if message.type == Gst.MessageType.ERROR:
+        """Handle GStreamer messages with all required parameters"""
+        if message.type == Gst.MessageType.EOS:
+            print("Playback finished")
+            if callback:
+                GLib.idle_add(callback)
+        elif message.type == Gst.MessageType.ERROR:
             err, debug = message.parse_error()
-            print(f"Wiedergabefehler: {err.message}")
-            self._cleanup_pipeline(pipeline, file_path)
+            print(f"Playback error: {err}, {debug}")
             if callback:
                 GLib.idle_add(callback)
+            pipeline.set_state(Gst.State.NULL)
 
-        elif message.type == Gst.MessageType.EOS:
-            self._cleanup_pipeline(pipeline, file_path)
-            if callback:
-                GLib.idle_add(callback)
+    def stop_audio(self):
+        """Stoppt die aktuelle Wiedergabe"""
+        if self._current_pipeline:
+            self._current_pipeline.set_state(Gst.State.NULL)
+            self._current_pipeline = None
+
 
     def _cleanup_pipeline(self, pipeline, file_path):
         """Räumt Pipeline-Ressourcen auf"""
