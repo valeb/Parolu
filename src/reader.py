@@ -214,11 +214,12 @@ class Reader():
             if callback:
                 GLib.idle_add(callback)
 
-
     def _on_gst_message(self, bus, message, pipeline, file_path, callback):
-        """Handle GStreamer messages with all required parameters"""
+
         if message.type == Gst.MessageType.EOS:
             print("Playback finished")
+            button = self.window.read_button
+            self.window.stop_playback(button)
             if callback:
                 GLib.idle_add(callback)
         elif message.type == Gst.MessageType.ERROR:
@@ -233,7 +234,6 @@ class Reader():
         if self._current_pipeline:
             self._current_pipeline.set_state(Gst.State.NULL)
             self._current_pipeline = None
-
 
     def _cleanup_pipeline(self, pipeline, file_path):
         """Räumt Pipeline-Ressourcen auf"""
@@ -267,7 +267,7 @@ class Reader():
 
         # Automatischer Stop nach der Dauer
         duration = len(samples) / rate
-        GLib.timeout_add_seconds(int(duration) + 1, self._stop_pipeline)
+        GLib.timeout_add_seconds(int(duration) + 1, self._stop_audio)
 
     def _play_test_tone(self):
         """Fallback: 440Hz Sinuswelle"""
@@ -276,10 +276,6 @@ class Reader():
             for i in range(22050)
         ])
         self._play_raw(samples, 22050)
-
-    def _stop_pipeline(self):
-        self.pipeline.set_state(Gst.State.NULL)
-        return False
 
     def _samples_to_wav(self, samples, target_rate=22050):
         audio = np.array(samples, dtype=np.int16)
