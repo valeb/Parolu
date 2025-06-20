@@ -1,2 +1,2 @@
 .flatpak-builder/
-avenv/
+avenv/.flatpak-builder/
