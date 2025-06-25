@@ -380,7 +380,7 @@ class ParoluWindow(Adw.ApplicationWindow):
     def on_save_audio_response(self, dialog, result):
         file = dialog.save_finish(result)
         if file is not None:
-            self.read.save_audio_file(file)
+            self.reader.save_audio_file(file)
 
     # definiert was geschieht wenn Stimmlage geändert wird
     def on_adjustment_value_changed(self, adjustment):

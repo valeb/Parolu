@@ -112,7 +112,7 @@ class Reader():
 
     def _synthesize_audio(self, text, lang_code, voice, pitch, speed):
         """Audio-Synthese im Hintergrundthread"""
-        temp_path = None
+        self.temp_path = None
         try:
             # Warten bis Dialog wirklich sichtbar ist
             if not self._dialog_ready.wait(timeout=2.0):
@@ -145,7 +145,7 @@ class Reader():
             # Temporäre Datei erstellen
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
                 f.write(wav_data)
-                temp_path = f.name
+                self.temp_path = f.name
 
             # Dialog schließen VOR Wiedergabe
             if hasattr(self, 'window') and self.window:
@@ -155,13 +155,13 @@ class Reader():
             # Wiedergabe mit Reaktivierungs-Callback starten
             GLib.idle_add(
                 lambda: self._play_audio_file_async(
-                    temp_path,
+                    self.temp_path,
                     callback=lambda: self._reactivate_ui()
                 )
             )
 
         except Exception as e:
-            GLib.idle_add(self._handle_error, str(e), temp_path)
+            GLib.idle_add(self._handle_error, str(e), self.temp_path)
 
     def _handle_error(self, error_msg, temp_path=None):
         """Zentrale Fehlerbehandlung"""
@@ -171,9 +171,9 @@ class Reader():
             self.window.set_sensitive(True)
             self.window._show_error(error_msg)
 
-        if temp_path:
+        if self.temp_path:
             try:
-                os.unlink(temp_path)
+                os.unlink(self.temp_path)
             except:
                 pass
 
