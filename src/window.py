@@ -172,9 +172,12 @@ class ParoluWindow(Adw.ApplicationWindow):
         selected = dropdown.get_selected()
         model = dropdown.get_model()
         print ('$$$$$$$$$$$$$ in on voice changed  ', model)
-        if selected == model.get_n_items() - 1:  # letzte Zeile ausgewählt
+        if selected == model.get_n_items() - 2:  # vorletzte Zeile ausgewählt
             if self.lang_code != "eo":
                 self._show_voice_download_dialog()
+        elif selected == model.get_n_items() - 1:  # letzte Zeile ausgewählt
+            if self.lang_code != "eo":
+                self._show_voice_delete_dialog()
 
     def _update_voice_chooser(self, lang_code):
         """Aktualisiert die Dropdown-Auswahl"""
@@ -189,6 +192,7 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         if lang_code != "eo":  # für Esperanto gibt es aktuell keine Stimmen
             model.append("Stimme herunterladen...")
+            model.append("Stimme entfernen...")
 
         self.voice_chooser.set_model(model)
         self.voice_chooser.set_selected(0)   # stellt Auswahlfenster auf die erste Zeile
@@ -252,6 +256,59 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         if listbox.get_first_child() is None:
             row = Adw.ActionRow(title="Alle Stimmen sind bereits installiert")
+            listbox.append(row)
+
+        scrolled.set_child(listbox)
+        main_box.append(scrolled)
+        dialog.set_content(main_box)
+        dialog.present()
+
+    def _show_voice_delete_dialog(self):
+        dialog = Adw.Window(
+            transient_for=self,
+            modal=True,
+            title="",  # Leerer Titel verhindert doppelte Anzeige
+            default_width=500,
+            default_height=300,
+            deletable=True  # X-Button aktivieren
+        )
+
+        # Hauptcontainer mit HeaderBar
+        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+
+        # Custom HeaderBar ohne doppelte Titelleiste
+        header_bar = Adw.HeaderBar()
+        title = Adw.WindowTitle(title="Stimme entfernen",
+                              subtitle="Wählen Sie eine Stimme aus")
+        header_bar.set_title_widget(title)
+        main_box.append(header_bar)
+
+        # Scrollbereich für die Liste
+        scrolled = Gtk.ScrolledWindow(vexpand=True)
+        listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE)
+
+        # installierte Stimmen anzeigen
+        installed_voices = self.voicemanager.get_installed_voices(self.lang_code)
+        installed_ids = {v['id'] for v in installed_voices}
+
+        for voice in installed_voices:
+            row = Adw.ActionRow(title=voice['name'],
+                              margin_start=12,
+                              margin_end=12)
+
+            # Löschen-Button
+            btn = Gtk.Button(label="Löschen",
+                           css_classes=["suggested-action"])
+            btn.connect('clicked', self._delete_voice,
+                      voice['id'], voice['path'], dialog)
+
+            # Layout
+
+            row.add_suffix(btn)
+            listbox.append(row)
+
+        if listbox.get_first_child() is None:
+            row = Adw.ActionRow(title="Es sind noch keine Stimmen für diese Sprache installiert")
             listbox.append(row)
 
         scrolled.set_child(listbox)
@@ -433,6 +490,68 @@ class ParoluWindow(Adw.ApplicationWindow):
                 on_error(e)
 
         threading.Thread(target=download_thread, daemon=True).start()
+
+    def _delete_voice(self, btn, voice_id, voice_path, parent_window):
+        """Löscht eine Stimme mit korrekter Fehlerbehandlung"""
+
+        # Bestätigungsdialog
+        confirm_dialog = Adw.MessageDialog(
+            transient_for=parent_window,
+            heading="Stimme löschen?",
+            body=f"Soll die Stimme '{voice_id}' wirklich dauerhaft gelöscht werden?",
+        )
+
+        confirm_dialog.add_response("cancel", "Abbrechen")
+        confirm_dialog.add_response("delete", "Löschen")
+        confirm_dialog.set_response_appearance("delete", Adw.ResponseAppearance.DESTRUCTIVE)
+
+        # Temporär Button deaktivieren
+        btn.set_sensitive(False)
+        btn.set_label("Wird gelöscht...")
+
+        def on_response(dialog, response):
+            if response == "delete":
+                try:
+                    import shutil
+                    if os.path.exists(voice_path):
+                        shutil.rmtree(voice_path)
+
+                        # Erfolgsmeldung in neuem Dialog
+                        success_dialog = Adw.MessageDialog(
+                            transient_for=parent_window,
+                            heading="Stimme gelöscht",
+                            body=f"Die Stimme '{voice_id}' wurde erfolgreich entfernt."
+                        )
+                        success_dialog.add_response("ok", "OK")
+                        success_dialog.connect("response", lambda *_: (
+                            parent_window.destroy(),
+                            self._update_voice_chooser(self.lang_code)
+                        ))
+                        success_dialog.present()
+
+                    else:
+                        raise Exception("Stimmen-Pfad existiert nicht")
+
+                except Exception as e:
+                    print(f"Löschfehler: {e}")
+                    btn.set_label("Erneut versuchen")
+                    btn.set_sensitive(True)
+
+                    # Fehlermeldung in neuem Dialog
+                    error_dialog = Adw.MessageDialog(
+                        transient_for=parent_window,
+                        heading="Löschen fehlgeschlagen",
+                        body=f"Fehler: {str(e)}"
+                    )
+                    error_dialog.add_response("ok", "OK")
+                    error_dialog.present()
+            else:
+                # Bei Abbruch Button zurücksetzen
+                btn.set_label("Löschen")
+                btn.set_sensitive(True)
+
+        confirm_dialog.connect("response", on_response)
+        confirm_dialog.present()
 
     ## ================================================================##
     # Dialog zum Öffnen einer Datei wird definiert

@@ -98,3 +98,30 @@ class VoiceManager:
                     downloaded += len(chunk)
                     if progress_callback:
                         progress_callback(downloaded, total_size)
+
+    def _delete_voice(self, btn, voice_id, voice_path, dialog):
+        confirm_dialog = Adw.MessageDialog(
+            # ... [wie oben] ...
+        )
+
+        def handle_response(dialog, response):
+            if response == "delete":
+                try:
+                    import shutil
+                    if os.path.exists(voice_path):
+                        shutil.rmtree(voice_path)
+                        toast = Adw.Toast(title=f"Stimme gelöscht", timeout=2)
+                        dialog.add_toast(toast)
+                        self._update_voice_chooser(self.lang_code)
+                        GLib.timeout_add_seconds(1, dialog.destroy)
+                    else:
+                        raise Exception("Stimmen-Pfad existiert nicht")
+                except Exception as e:
+                    btn.set_label("Fehlgeschlagen")
+                    toast = Adw.Toast(title=f"Löschen fehlgeschlagen: {e}", timeout=3)
+                    dialog.add_toast(toast)
+                    GLib.timeout_add_seconds(3, lambda: btn.set_label("Löschen"))
+                    GLib.timeout_add_seconds(3, lambda: btn.set_sensitive(True))
+
+        confirm_dialog.connect("response", handle_response)
+        confirm_dialog.present()
