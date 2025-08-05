@@ -138,7 +138,7 @@
 	       {
 	         "type": "git",
 	         "url": "https://github.com/pybind/pybind11.git",
-	         "tag": "v2.11.1"
+	         "tag": "v2.13.5"
 	       }
 	     ]
 	   },
