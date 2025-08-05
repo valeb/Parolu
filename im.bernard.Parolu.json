@@ -310,7 +310,6 @@
 	  "name": "parolu",
 	  "builddir" : true,
 	  "buildsystem": "meson",
-	  "depends":["piper-python"],
 	  "build-commands": [
 	    "install -d /app/lib/parolu",
 	    "cp -v src/main.py src/window.py src/reader.py /app/lib/parolu/",
