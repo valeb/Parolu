@@ -81,7 +81,7 @@
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage">
-                        <property name="icon-name">pitch-symbolic</property>
+                        <property name="icon-name">pitch_symbolic</property>
                       </object>
                     </child>
                     <child>
@@ -143,7 +143,7 @@
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage">
-                        <property name="icon-name">speed-symbolic</property>
+                        <property name="icon-name">speed_symbolic</property>
                       </object>
                     </child>
                     <child>

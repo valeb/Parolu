@@ -278,8 +278,8 @@
 	    "buildsystem": "simple",
 	    "build-commands": [
 	      "mkdir -p /app/share/icons/hicolor/scalable/actions/",
-	      "install -Dm644 data/icons/hicolor/scalable/actions/speed-symbolic.svg /app/share/icons/hicolor/scalable/actions/speed-symbolic.svg || true",
-	      "install -Dm644 data/icons/hicolor/scalable/actions/pitch-symbolic.svg /app/share/icons/hicolor/scalable/actions/pitch-symbolic.svg || true"
+	      "install -Dm644 data/icons/hicolor/scalable/actions/speed_symbolic.svg /app/share/icons/hicolor/scalable/actions/speed_symbolic.svg || true",
+	      "install -Dm644 data/icons/hicolor/scalable/actions/pitch_symbolic.svg /app/share/icons/hicolor/scalable/actions/pitch_symbolic.svg || true"
 	      ],
 	    "sources": [
 	      {
