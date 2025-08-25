@@ -2,9 +2,6 @@
     "name": "python-flatpak-deps",
     "buildsystem": "simple",
     "build-commands": [],
-    "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.python3.12"
-    ],
     "modules": [
 
 {

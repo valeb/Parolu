@@ -199,9 +199,6 @@
 	      "type": "file",
 	      "path": "src/piper.cpp"
 	    }
-	  ],
-	  "depends": [
-	    "piper", "onnxruntime", "espeak", "piperphonemize"
 	  ]
 	},
 
