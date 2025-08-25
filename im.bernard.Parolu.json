@@ -4,28 +4,13 @@
     "runtime-version" : "48",
     "sdk" : "org.gnome.Sdk",
     "command" : "parolu",
-    "build-options": {
-      "env": {
-        "CC": "gcc",
-	"C_INCLUDE_PATH": "/app/include:/app/include/espeak-ng:/usr/include/espeak-ng",
-	"CPLUS_INCLUDE_PATH": "/app/include:/app/include/espeak-ng:/usr/include/espeak-ng",
-	"LIBRARY_PATH": "/app/lib",
-	"LD_LIBRARY_PATH": "/app/lib",
-	"CXX": "g++",
-	"cflags": "-O2 -fPIC",
-        "cxxflags": "-O2 -fPIC -std=c++17",
-        "PYTHONPATH": "/app/lib"
-      }
-    },
     "finish-args" : [
         "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--socket=pulseaudio",
-        "--filesystem=xdg-run/tmp",
-        "--allow=multiarch"
+        "--socket=pulseaudio"
     ],
     "cleanup" : [
         "/include",
