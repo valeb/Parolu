@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the parolu package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: parolu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-28 18:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/window.ui:19
+msgid "Öffnen einer Text-Datei"
+msgstr ""
+
+#: src/window.ui:26
+msgid "Speichern des Texts"
+msgstr ""
+
+#: src/window.ui:34
+msgid "Menu"
+msgstr ""
+
+#: src/window.ui:52
+msgid "Wählen Sie eine Sprache"
+msgstr ""
+
+#: src/window.ui:71
+msgid "Wählen Sie eine Stimme"
+msgstr ""
+
+#: src/window.ui:78
+msgid "Wählen Sie eine Stimmlage"
+msgstr ""
+
+#: src/window.ui:140
+msgid "Wählen Sie eine Geschwindigkeit"
+msgstr ""
+
+#: src/window.ui:210
+msgid "Speichern des Audios"
+msgstr ""
+
+#: src/window.ui:239
+msgid "_Keyboard Shortcuts"
+msgstr ""
+
+#: src/window.ui:243
+msgid "_About Parolu"
+msgstr ""
+
+#: data/im.bernard.Parolu.desktop.in:3 data/im.bernard.Parolu.metainfo.xml.in:4
+msgid "Parolu"
+msgstr ""
+
+#: data/im.bernard.Parolu.metainfo.xml.in:5
+msgid "Sprachsynthese mir verschiedenen Synthesizern"
+msgstr ""
+
+#: data/im.bernard.Parolu.metainfo.xml.in:9
+msgid "Bernard"
+msgstr ""
+
+#: data/im.bernard.Parolu.metainfo.xml.in:12
+msgid ""
+"Parolu ist ein benutzerfreundliches Frontend für die Sprachsynthese mit "
+"Piper. Es bietet natürlich klingende Sprachausgabe für viele Sprachen – "
+"komplett offline und datenschutzfreundlich."
+msgstr ""
+
+#: data/im.bernard.Parolu.metainfo.xml.in:16
+msgid ""
+"Ideal für Screenreader, Sprachassistenten, Barrierefreiheit oder "
+"experimentelle Anwendungen."
+msgstr ""
+
+#: data/im.bernard.Parolu.metainfo.xml.in:35
+msgid "Erste veröffentlichte Version."
+msgstr ""

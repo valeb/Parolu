@@ -15,24 +15,21 @@ espeak_dep = dependency('espeak-ng', required: false)
 
 # Include-Pfade
 piper_inc = include_directories('src/cpp/utf8')
-onnx_inc = include_directories('/app/include', '/app/include/onnxruntime')
 
 if not onnx_dep.found()
   onnx_dep = declare_dependency(
-    link_args: ['-L/app/lib', '-lonnxruntime'],
-    include_directories: onnx_inc
+    link_args: ['-L/app/lib', '-lonnxruntime']
   )
 endif
 
 phonemize_dep = declare_dependency(
-  include_directories: include_directories('/app/include'),
   link_args: ['-lpiper_phonemize']
 )
 
 # Bibliothek bauen
 piper_lib = library('piper',
   piper_sources,
-  include_directories: [piper_inc, onnx_inc],
+  include_directories: [piper_inc],
   dependencies: [pybind11_dep, onnx_dep, phonemize_dep, espeak_dep],
   install: true
 )
