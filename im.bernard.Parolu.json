@@ -325,8 +325,7 @@
         "touch /app/lib/parolu/__init__.py",
         "install -Dm755 bin/parolu /app/bin/parolu",
         "glib-compile-resources src/parolu.gresource.xml --target=parolu.gresource --sourcedir=src",
-        "install -Dm644 parolu.gresource /app/share/parolu.gresource",
-        "install -Dm644 src/dummy.wav /app/share/parolu/dummy.wav"
+        "install -Dm644 parolu.gresource /app/share/parolu.gresource"
       ],
       "build-options": {
         "env": {
