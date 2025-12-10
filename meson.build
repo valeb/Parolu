@@ -9,21 +9,6 @@ gnome = import('gnome')
 python_mod = import('python')
 python = python_mod.find_installation('python3')
 
-# Installiere Wrapper
-install_data('bin/parolu', install_dir: '/app/bin')
-install_data(
-  'data/icons/hicolor/scalable/actions/im.bernard.Parolu.pitch-symbolic.svg',
-  'data/icons/hicolor/scalable/actions/im.bernard.Parolu.speed-symbolic.svg',
-  install_dir: get_option('prefix') / 'share/icons/hicolor/scalable/actions'
-)
-
-# Installiere alle Python-Quelldateien aus src/
-python.install_sources(
-  ['src/main.py', 'src/window.py', 'src/__init__.py', 'src/reader.py', 'src/pipervoice.py', 'src/window.ui', 'src/vocxpo.py'
-  ],
-  subdir: 'parolu'
-)
-
 # Python & Pybind11
 pybind11_dep = dependency('pybind11', required: true)
 
@@ -49,6 +34,7 @@ python.extension_module(
 # Übersetzungen und Ressourcen
 subdir('data')
 subdir('po')
+subdir('src')
 subdir('patches')
 subdir('models')
 
