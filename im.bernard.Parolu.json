@@ -23,6 +23,11 @@
         "*.la",
         "*.a"
     ],
+    "build-options" : {
+        "env" : {
+            "ONNX_ROOT" : "/app/onnx_root"
+        }
+    },
     "modules": [
         "python3-requirements.json",
         "python3-numpy.json",
@@ -38,22 +43,33 @@
             ]
         },
         {
-            "name": "onnxruntime",
-            "buildsystem": "simple",
-            "build-commands": [
-                "mkdir -p /app/lib /app/include",
-                "cp -v lib/libonnxruntime.so* /app/lib/",
-                "ln -sf /app/lib/libonnxruntime.so.1.16.1 /app/lib/libonnxruntime.so",
-                "mkdir -p /app/include/onnxruntime",
-                "cp -v include/*.h /app/include/"
-            ],
-            "sources": [
+            "name" : "onnxruntime",
+            "buildsystem" : "simple",
+            "sources" : [
                 {
-                    "type": "archive",
-                    "url": "https://github.com/microsoft/onnxruntime/releases/download/v1.16.1/onnxruntime-linux-x64-1.16.1.tgz",
-                    "sha256": "53a0f03f71587ed602e99e82773132fc634b74c2d227316fbfd4bf67181e72ed",
+                    "type" : "archive",
+                    "only-arches" : ["x86_64"],
+                    "dest" : "onnxruntime-1",
+                    "url" : "https://github.com/microsoft/onnxruntime/releases/download/v1.16.1/onnxruntime-linux-x64-1.16.1.tgz",
+                    "sha256" : "53a0f03f71587ed602e99e82773132fc634b74c2d227316fbfd4bf67181e72ed",
+                    "strip-components": 1
+                },
+
+                {
+                    "type" : "archive",
+                    "only-arches" : ["aarch64"],
+                    "dest" : "onnxruntime-1",
+                    "url" : "https://github.com/microsoft/onnxruntime/releases/download/v1.16.1/onnxruntime-linux-aarch64-1.16.1.tgz",
+                    "sha256" : "f10851b62eb44f9e811134737e7c6edd15733d2c1549cb6ce403808e9c047385",
                     "strip-components": 1
                 }
+            ],
+            "build-commands" : [
+                "mkdir -p $ONNX_ROOT",
+                "mv onnxruntime-1/* $ONNX_ROOT",
+
+                "cp $ONNX_ROOT/lib/* $FLATPAK_DEST/lib",
+                "cp -v $ONNX_ROOT/include/*.h $FLATPAK_DEST/include/"
             ]
         },
         {
@@ -62,8 +78,6 @@
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
-                "-DCMAKE_INSTALL_PREFIX=/app",
-                "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
                 "-DBUILD_SHARED_LIBS=ON"
             ],
             "build-commands": [
@@ -125,15 +139,14 @@
             },
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
-                "-DCMAKE_INSTALL_PREFIX=/app",
                 "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
                 "-DPIPER_PHONEMIZE_INCLUDE=/app/include/piper-phonemize",
                 "-Donnxruntime_LIBRARY=/app/lib/libonnxruntime.so.1.16.1",
                 "-Donnxruntime_INCLUDE_DIR=/app/include/onnxruntime"
             ],
             "build-commands": [
-		"mkdir -p /app/include/python3.12",
-		"cp -r /usr/include/python3.12/* /app/include/python3.12/",
+                "mkdir -p /app/include/python3.12",
+                "cp -r /usr/include/python3.12/* /app/include/python3.12/",
                 "mkdir -p /app/include/piper",
                 "cp src/cpp/piper.hpp /app/include/piper/"
             ],
@@ -165,9 +178,7 @@
             "name": "piper-python",
             "buildsystem": "simple",
             "build-options": {
-                "env": {
-                    "CXXFLAGS": "-O3 -Wall -shared -std=c++17 -fPIC"
-                }
+                "cxxflags": "-o3 -Wall -shared -std=c++17 -fPIC"
             },
             "build-commands": [
                 "mkdir -p /app/lib/python3.12/site-packages",
