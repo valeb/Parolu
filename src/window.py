@@ -244,7 +244,7 @@ class ParoluWindow(Adw.ApplicationWindow):
             if voice['id'] in installed_ids:
 
                 # Get the path
-                path = next(item["path"] for item in installed_voices if item["id"] == voice['id'])
+                path = next(item['path'] for item in installed_voices if item['id'] == voice['id'])
 
                 # Löschen-Button
                 btn = Gtk.Button(label=_("Delete"),
