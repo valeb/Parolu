@@ -4,4 +4,8 @@
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
   </gresource>
+  <gresource prefix="/im/bernard/Parolu/icons/scalable/actions">
+    <file preprocess="xml-stripblanks" alias="im.bernard.Parolu.pitch-symbolic.svg">icons/im.bernard.Parolu.pitch-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" alias="im.bernard.Parolu.speed-symbolic.svg">icons/im.bernard.Parolu.speed-symbolic.svg</file>
+  </gresource>
 </gresources>

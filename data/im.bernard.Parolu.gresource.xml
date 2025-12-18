@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gresources>
-  <gresource prefix="/im/bernard/Parolu">
-    <file compressed="true" preprocess="xml-stripblanks">window.ui</file>
-    <file preprocess="xml-stripblanks">icons/hicolor/scalable/actions/im.bernard.Parolu.pitch-symbolic.svg</file>
-    <file preprocess="xml-stripblanks">icons/hicolor/scalable/actions/im.bernard.Parolu.speed-symbolic.svg</file>
-  </gresource>
-</gresources>
