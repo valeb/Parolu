@@ -75,9 +75,10 @@
             <child>
               <object class="GtkMenuButton">
                 <property name="tooltip-text" translatable="yes">Adjust Pitch</property>
+                <property name="width-request">75</property>
+
                 <child>
                   <object class="GtkBox">
-                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage">
                         <property name="icon-name">im.bernard.Parolu.pitch-symbolic</property>
@@ -139,10 +140,10 @@
             <child>
               <object class="GtkMenuButton">
                 <property name="tooltip-text" translatable="yes">Adjust Speed</property>
+                <property name="width-request">75</property>
 
                 <child>
                   <object class="GtkBox">
-                    <property name="spacing">6</property>
                     <child>
                       <object class="GtkImage">
                         <property name="icon-name">im.bernard.Parolu.speed-symbolic</property>
