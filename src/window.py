@@ -50,9 +50,11 @@ class ParoluWindow(Adw.ApplicationWindow):
     read_button = Gtk.Template.Child()     # spielt Audio-Datei ab
     save_button = Gtk.Template.Child()     # speichert Audio-Datei
     lang_chooser= Gtk.Template.Child()     # lädt Sprache
+    voice_chooser= Gtk.Template.Child()    # lädt Stimme
     pitch_chooser = Gtk.Template.Child()   # lädt Geschlecht
     speed_chooser= Gtk.Template.Child()    # lädt Sprechgeschwindigkeit
-    voice_chooser= Gtk.Template.Child()    # lädt Stimme
+    pitch_button = Gtk.Template.Child()
+    speed_button= Gtk.Template.Child()
     label_1 = Gtk.Template.Child()         # zeigt Stimmlage an
     adjustment_1 = Gtk.Template.Child()    # Wert der Stimmlage
     label_2 = Gtk.Template.Child()         # zeigt Geschwindigkeit an
@@ -116,6 +118,17 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         # HACK: This should be in the UI file, but for some reason style classes are not applied
         GLib.idle_add(self.get_style_context().add_class, "view")
+        GLib.idle_add(self.read_button.get_style_context().add_class, "pill")
+        GLib.idle_add(self.read_button.get_style_context().add_class, "suggested-action")
+        GLib.idle_add(self.save_button.get_style_context().add_class, "circular")
+        GLib.idle_add(self.save_button.get_style_context().add_class, "flat")
+        GLib.idle_add(self.lang_chooser.get_first_child().get_style_context().add_class, "flat")
+        GLib.idle_add(self.voice_chooser.get_first_child().get_style_context().add_class, "flat")
+        GLib.idle_add(self.pitch_button.get_style_context().add_class, "flat")
+        GLib.idle_add(self.speed_button.get_style_context().add_class, "flat")
+        GLib.idle_add(self.pitch_button.get_style_context().add_class, "numeric")
+        GLib.idle_add(self.speed_button.get_style_context().add_class, "numeric")
+
 
     def show_wait_dialog(self):
         self.wait_dialog = Gtk.Dialog(
