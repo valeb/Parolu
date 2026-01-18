@@ -114,6 +114,9 @@ class ParoluWindow(Adw.ApplicationWindow):
         self.lang_code = self.lang_map.get(lang_name, "en")
         # print ('Sprachkodex am Beginn  ', self.lang_code)
 
+        # HACK: This should be in the UI file, but for some reason style classes are not applied
+        GLib.idle_add(self.get_style_context().add_class, "view")
+
     def show_wait_dialog(self):
         self.wait_dialog = Gtk.Dialog(
            title= _("Synchronizing"),
