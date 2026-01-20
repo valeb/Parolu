@@ -232,7 +232,7 @@ class ParoluWindow(Adw.ApplicationWindow):
             modal=True,
             title="",  # Leerer Titel verhindert doppelte Anzeige
             default_width=500,
-            default_height=300,
+            default_height=500,
             deletable=True  # X-Button aktivieren
         )
 
@@ -247,7 +247,15 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         # Scrollbereich für die Liste
         scrolled = Gtk.ScrolledWindow(vexpand=True)
-        listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE)
+        listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE,
+                            css_classes=["boxed-list"],
+                            margin_top=18,
+                            margin_bottom=18,
+                            margin_start=12,
+                            margin_end=12,
+                            valign="GTK_ALIGN_START")
+
+
 
         # Stimmen laden und filtern
         available_voices = self._fetch_available_voices()
@@ -259,9 +267,7 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         for voice in available_voices:
             if voice['id'] not in installed_ids:
-                row = Adw.ActionRow(title=voice['name'],
-                                  margin_start=12,
-                                  margin_end=12)
+                row = Adw.ActionRow(title=voice['name'])
 
                 # Fortschrittsbalken
                 progress = Gtk.ProgressBar(
@@ -273,7 +279,7 @@ class ParoluWindow(Adw.ApplicationWindow):
 
                 # Installations-Button
                 btn = Gtk.Button(label="Install",
-                               css_classes=["suggested-action"])
+                               valign="GTK_ALIGN_CENTER")
                 btn.connect('clicked', self._on_voice_selected,
                           voice['id'], voice['model_url'], voice['config_url'], dialog)
 
@@ -312,20 +318,24 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         # Scrollbereich für die Liste
         scrolled = Gtk.ScrolledWindow(vexpand=True)
-        listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE)
+        listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE,
+                            css_classes=["boxed-list"],
+                            margin_top=18,
+                            margin_bottom=18,
+                            margin_start=12,
+                            margin_end=12,
+                            valign="GTK_ALIGN_START")
 
         # installierte Stimmen anzeigen
         installed_voices = self.voicemanager.get_installed_voices(self.lang_code)
         installed_ids = {v['id'] for v in installed_voices}
 
         for voice in installed_voices:
-            row = Adw.ActionRow(title=voice['name'],
-                              margin_start=12,
-                              margin_end=12)
+            row = Adw.ActionRow(title=voice['name'])
 
             # Löschen-Button
             btn = Gtk.Button(label=_("Delete"),
-                           css_classes=["suggested-action"])
+                               valign="GTK_ALIGN_CENTER")
             btn.connect('clicked', self._delete_voice,
                       voice['id'], voice['path'], dialog)
 
