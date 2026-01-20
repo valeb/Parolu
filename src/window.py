@@ -432,7 +432,7 @@ class ParoluWindow(Adw.ApplicationWindow):
                 if urls and len(urls) >= 2:
                     voices.append({
                         'id': f"{lang_code}-{current_voice}-{quality}",
-                        'name': f"{current_voice} ({quality})",
+                        'name': f"{current_voice.capitalize()}",
                         'model_url': urls[0],  # Erste URL ist das Modell
                         'config_url': urls[1],  # Zweite URL ist die Konfig
                         'quality': quality
