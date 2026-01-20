@@ -52,12 +52,12 @@ class ParoluApplication(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='parolu',
+                                application_name='Parolu',
                                 application_icon='im.bernard.Parolu',
-                                developer_name='walter',
+                                developer_name='Walter Bernard',
                                 version='0.1.0',
-                                developers=['walter'],
-                                copyright='© 2025 walter')
+                                developers=['Walter Bernard'],
+                                copyright='© 2025 Walter Bernard')
         about.present()
 
     def on_preferences_action(self, widget, _):
