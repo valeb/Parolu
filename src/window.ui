@@ -50,7 +50,7 @@
                 <property name="margin-bottom">12</property>
                 <property name="margin-start">12</property>
                 <property name="margin-end">12</property>
-                <property name="halign">GTK_ALIGN_LEFT</property>
+                <property name="halign">GTK_ALIGN_START</property>
                 <property name="spacing">6</property>
 
                 <child type="start">
@@ -72,6 +72,7 @@
                     </property>
                   </object>
                 </child>
+
                 <child>
                   <object class="GtkDropDown" id="voice_chooser">
                     <property name="enable-search">false</property>
@@ -91,37 +92,7 @@
                 <property name="margin-bottom">12</property>
                 <property name="margin-start">12</property>
                 <property name="margin-end">12</property>
-                <property name="halign">GTK_ALIGN_CENTER</property>
-                <property name="hexpand">true</property>
-                <property name="spacing">6</property>
-
-                <child>
-                  <object class="GtkButton" id="read_button">
-                    <property name="icon-name">media-playback-start-symbolic</property>
-                    <property name="tooltip-text" translatable="yes">Read Text</property>
-                    <signal name="clicked" handler="read_text" swapped="no"/>
-                  </object>
-                </child>
-
-                <child type="end">
-                  <object class="GtkButton" id="save_button">
-                    <property name="tooltip-text" translatable="yes">Save Audio to File</property>
-                    <property name="icon-name">document-save</property>
-                    <property name="valign">GTK_ALIGN_CENTER</property>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <child>
-              <object class="GtkBox">
-                <property name="orientation">0</property>
-                <property name="margin-top">12</property>
-                <property name="margin-bottom">12</property>
-                <property name="margin-start">12</property>
-                <property name="margin-end">12</property>
-                <property name="halign">GTK_ALIGN_RIGHT</property>
+                <property name="halign">GTK_ALIGN_START</property>
                 <property name="spacing">6</property>
                 <child>
                   <object class="GtkMenuButton" id="pitch_button">
@@ -148,6 +119,7 @@
                         </child>
                       </object>
                     </child>
+
                     <property name="popover">
                       <object class="GtkPopover">
                         <child>
@@ -256,6 +228,38 @@
                 </child>
               </object>
             </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">0</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="halign">GTK_ALIGN_END</property>
+                <property name="hexpand">true</property>
+                <property name="spacing">6</property>
+
+                <child type="end">
+                  <object class="GtkButton" id="save_button">
+                    <property name="tooltip-text" translatable="yes">Save Audio to File</property>
+                    <property name="icon-name">document-save</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkButton" id="read_button">
+                    <property name="icon-name">media-playback-start-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Read Text</property>
+                    <signal name="clicked" handler="read_text" swapped="no"/>
+                  </object>
+                </child>
+
+              </object>
+            </child>
+
+
 
           </object>
         </child>
