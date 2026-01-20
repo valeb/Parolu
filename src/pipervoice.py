@@ -65,7 +65,7 @@ class VoiceManager:
         parts = voice_id.split('-')
         # print ('Teile der Stimme  ', len(parts), parts)
         if len(parts) > 1:
-            return f"{parts[1].capitalize()} ({parts[2]})" # hier wird Kerstin (low) zurückgegeben
+            return f"{parts[1].capitalize()}" # hier wird "Kerstin" zurückgegeben
         return voice_id
 
     def download_voice(self, voice_id, model_url, config_url, progress_callback=None):
