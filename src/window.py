@@ -197,9 +197,11 @@ class ParoluWindow(Adw.ApplicationWindow):
         if selected == model.get_n_items() - 2:  # vorletzte Zeile ausgewählt
             if self.lang_code != "eo":
                 self._show_voice_download_dialog()
+                dropdown.set_selected(0)
         elif selected == model.get_n_items() - 1:  # letzte Zeile ausgewählt
             if self.lang_code != "eo":
                 self._show_voice_delete_dialog()
+                dropdown.set_selected(0)
 
     def _update_voice_chooser(self, lang_code):
         """Aktualisiert die Dropdown-Auswahl"""
