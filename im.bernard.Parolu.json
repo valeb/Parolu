@@ -192,21 +192,21 @@
             ]
         },
         {
-            "name": "piper-model-darkman",
+            "name": "piper-model-ludoviko",
             "buildsystem": "simple",
             "build-commands": [
-                "mkdir -p /app/share/piper/eo/eo-darkman-medium",
-                "cp eo-darkman-medium.onnx /app/share/piper/eo/eo-darkman-medium/",
-                "cp eo-darkman-medium.onnx.json /app/share/piper/eo/eo-darkman-medium/"
+                "mkdir -p /app/share/piper/eo/eo-ludoviko-medium",
+                "cp eo-ludoviko-medium.onnx /app/share/piper/eo/eo-ludoviko-medium/",
+                "cp eo-ludoviko-medium.onnx.json /app/share/piper/eo/eo-ludoviko-medium/"
             ],
             "sources": [
                 {
                     "type": "file",
-                    "path": "models/eo/eo-darkman-medium/eo-darkman-medium.onnx"
+                    "path": "models/eo/eo-ludoviko-medium/eo-ludoviko-medium.onnx"
                 },
                 {
                     "type": "file",
-                    "path": "models/eo/eo-darkman-medium/eo-darkman-medium.onnx.json"
+                    "path": "models/eo/eo-ludoviko-medium/eo-ludoviko-medium.onnx.json"
                 }
             ]
         },

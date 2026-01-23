@@ -4,7 +4,7 @@
     "quality": "medium"
   },
   "espeak": {
-    "voice": "pl"
+    "voice": "eo"
   },
   "inference": {
     "noise_scale": 0.667,
@@ -476,12 +476,12 @@
   "speaker_id_map": {},
   "piper_version": "1.0.0",
   "language": {
-    "code": "pl_PL",
-    "family": "pl",
-    "region": "PL",
-    "name_native": "Polski",
-    "name_english": "Polish",
-    "country_english": "Poland"
+    "code": "eo_EO",
+    "family": "eo",
+    "region": "EO",
+    "name_native": "Esperanto",
+    "name_english": "Esperanto",
+    "country_english": "International"
   },
-  "dataset": "darkman"
+  "dataset": "ludoviko"
 }

@@ -3655,67 +3655,35 @@
         },
         "aliases": []
     },
-    "pl_PL-darkman-medium": {
-        "key": "pl_PL-darkman-medium",
-        "name": "darkman",
+    "eo_EO-ludoviko-medium": {
+        "key": "eo_EO-ludoviko-medium",
+        "name": "ludoviko",
         "language": {
-            "code": "pl_PL",
-            "family": "pl",
-            "region": "PL",
-            "name_native": "Polski",
-            "name_english": "Polish",
-            "country_english": "Poland"
+            "code": "eo_EO",
+            "family": "eo",
+            "region": "EO",
+            "name_native": "Esperanto",
+            "name_english": "Esperanto",
+            "country_english": "International"
         },
         "quality": "medium",
         "num_speakers": 1,
         "speaker_id_map": {},
         "files": {
-            "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx": {
+            "eo/eo_EO/ludoviko/medium/eo_EO-ludoviko-medium.onnx": {
                 "size_bytes": 63201294,
                 "md5_digest": "27bf2d71e934b112657544fd0b100a7a"
             },
-            "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx.json": {
+            "eo/eo_EO/ludoviko/medium/eo_EO-ludoviko-medium.onnx.json": {
                 "size_bytes": 6922,
                 "md5_digest": "fe9c08562aafa2d7ab6996e5e46f75a0"
             },
-            "pl/pl_PL/darkman/medium/MODEL_CARD": {
+            "eo/eo_EO/ludoviko/medium/MODEL_CARD": {
                 "size_bytes": 276,
                 "md5_digest": "952772905864f6f6375df54a675895b7"
             }
         },
         "aliases": []
-    },
-    "pl_PL-mls_6892-low": {
-        "key": "pl_PL-mls_6892-low",
-        "name": "mls_6892",
-        "language": {
-            "code": "pl_PL",
-            "family": "pl",
-            "region": "PL",
-            "name_native": "Polski",
-            "name_english": "Polish",
-            "country_english": "Poland"
-        },
-        "quality": "low",
-        "num_speakers": 1,
-        "speaker_id_map": {},
-        "files": {
-            "pl/pl_PL/mls_6892/low/pl_PL-mls_6892-low.onnx": {
-                "size_bytes": 63104526,
-                "md5_digest": "8590d8e979292ca35d20e6e123bfa612"
-            },
-            "pl/pl_PL/mls_6892/low/pl_PL-mls_6892-low.onnx.json": {
-                "size_bytes": 5953,
-                "md5_digest": "e1452902947280b5d245c6534aa4905d"
-            },
-            "pl/pl_PL/mls_6892/low/MODEL_CARD": {
-                "size_bytes": 257,
-                "md5_digest": "74ebc618d120896113449ad2f957b7a4"
-            }
-        },
-        "aliases": [
-            "pl-mls_6892-low"
-        ]
     },
     "pl_PL-gosia-medium": {
         "key": "pl_PL-gosia-medium",
