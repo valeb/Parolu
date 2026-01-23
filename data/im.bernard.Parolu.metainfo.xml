@@ -43,13 +43,13 @@
 
   <screenshots>
 		<screenshot type="default">
-			<image>https://raw.githubusercontent.com/wbernard/Parolu/?????/screenshots/screenshot.png</image>
+			<image>https://raw.githubusercontent.com/wbernard/Parolu/e0e70f216b1b1cba19b51fa19f7e7ac6c8350895/data/screenshots/screenshot.png</image>
 			<caption>Read text out loud</caption>
 		</screenshot>
 	</screenshots>
 
   <releases>
-    <release version="0.1.0" date="2026-02-01">
+    <release version="0.1.0" date="2026-01-25">
       <description>
         <p>Initial release</p>
       </description>
