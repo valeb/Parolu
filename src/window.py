@@ -132,7 +132,7 @@ class ParoluWindow(Adw.ApplicationWindow):
 
     def show_wait_dialog(self):
         self.wait_dialog = Gtk.Dialog(
-           title= _("Synchronizing"),
+           title= _("Loading"),
             transient_for=self,
             modal=True
         )
@@ -146,14 +146,9 @@ class ParoluWindow(Adw.ApplicationWindow):
         box.set_margin_start(12)
         box.set_margin_end(12)
 
-        # Label mit Ausrichtung
-        label = Gtk.Label(label=_("Please wait..."))
-        label.set_halign(Gtk.Align.CENTER)
-        box.append(label)
-
         # Spinner
-        self.spinner = Gtk.Spinner()
-        self.spinner.start()
+        self.spinner = Adw.Spinner()
+        self.spinner.set_size_request(32, 32)
         box.append(self.spinner)
 
         self.wait_dialog.set_child(box)
@@ -162,8 +157,6 @@ class ParoluWindow(Adw.ApplicationWindow):
     def hide_wait_dialog(self):
         if hasattr(self, 'wait_dialog') and self.wait_dialog:
             self.wait_dialog.destroy()
-        if hasattr(self, 'spinner') and self.spinner:
-            self.spinner.stop()
 
     def _show_error(self, message):
         dialog = Gtk.MessageDialog(
