@@ -3685,30 +3685,30 @@
         },
         "aliases": []
     },
-    "pl_PL-gosia-medium": {
-        "key": "pl_PL-gosia-medium",
+    "eo_EO-gosia-medium": {
+        "key": "eo_EO-gosia-medium",
         "name": "gosia",
         "language": {
-            "code": "pl_PL",
-            "family": "pl",
-            "region": "PL",
-            "name_native": "Polski",
-            "name_english": "Polish",
-            "country_english": "Poland"
+            "code": "eo_EO",
+            "family": "eo",
+            "region": "EO",
+            "name_native": "Esperanto",
+            "name_english": "Esperanto",
+            "country_english": "International"
         },
         "quality": "medium",
         "num_speakers": 1,
         "speaker_id_map": {},
         "files": {
-            "pl/pl_PL/gosia/medium/pl_PL-gosia-medium.onnx": {
+            "eo/eo_EO/gosia/medium/eo_EO-gosia-medium.onnx": {
                 "size_bytes": 63201294,
                 "md5_digest": "ecf817530e575025166e454adde1f382"
             },
-            "pl/pl_PL/gosia/medium/pl_PL-gosia-medium.onnx.json": {
+            "eo/eo_EO/gosia/medium/eo_EO-gosia-medium.onnx.json": {
                 "size_bytes": 6920,
                 "md5_digest": "82fe5f840c3af4c98e8a1430431ecdbd"
             },
-            "pl/pl_PL/gosia/medium/MODEL_CARD": {
+            "eo/eo_EO/gosia/medium/MODEL_CARD": {
                 "size_bytes": 274,
                 "md5_digest": "e1355330fe5fab166e6f2e20af7e91e9"
             }
