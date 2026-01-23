@@ -266,6 +266,7 @@ class ParoluWindow(Adw.ApplicationWindow):
                 progress = Gtk.ProgressBar(
                     show_text=True,
                     visible=False,
+                    valign="GTK_ALIGN_CENTER",
                     margin_end=12
                 )
                 self.download_progress[voice['id']] = progress
