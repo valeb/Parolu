@@ -215,8 +215,8 @@ class ParoluWindow(Adw.ApplicationWindow):
             # print ('Namen der Stimme voice[name]  = ', voice['name'])
 
         if lang_code != "eo":  # für Esperanto gibt es aktuell keine Stimmen
-            model.append(_("Download Voice…"))
-            model.append(_("Delete Voice…"))
+            model.append(_("Download Voices…"))
+            model.append(_("Delete Voices…"))
 
         self.voice_chooser.set_model(model)
         self.voice_chooser.set_selected(0)   # stellt Auswahlfenster auf die erste Zeile
@@ -225,34 +225,28 @@ class ParoluWindow(Adw.ApplicationWindow):
         dialog = Adw.Window(
             transient_for=self,
             modal=True,
-            title="",  # Leerer Titel verhindert doppelte Anzeige
             default_width=500,
-            default_height=500,
-            deletable=True  # X-Button aktivieren
+            default_height=500
         )
 
-        # Hauptcontainer mit HeaderBar
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        toolbar_view = Adw.ToolbarView()
 
-        # Custom HeaderBar ohne doppelte Titelleiste
         header_bar = Adw.HeaderBar()
         title = Adw.WindowTitle(title=_("Download Voices"))
         header_bar.set_title_widget(title)
-        main_box.append(header_bar)
+        toolbar_view.add_top_bar(header_bar)
 
-        # Scrollbereich für die Liste
+        # Scrollview with list of voices
         scrolled = Gtk.ScrolledWindow(vexpand=True)
         listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE,
                             css_classes=["boxed-list"],
-                            margin_top=18,
+                            margin_top=12,
                             margin_bottom=18,
-                            margin_start=12,
-                            margin_end=12,
+                            margin_start=18,
+                            margin_end=18,
                             valign="GTK_ALIGN_START")
 
-
-
-        # Stimmen laden und filtern
+        # Load and filter voices
         available_voices = self._fetch_available_voices()
         installed_voices = self.voicemanager.get_installed_voices(self.lang_code)
         installed_ids = {v['id'] for v in installed_voices}
@@ -284,42 +278,43 @@ class ParoluWindow(Adw.ApplicationWindow):
                 row.add_suffix(btn)
                 listbox.append(row)
 
+        # Show status page if there are no voices to install, otherwise show list of voices
         if listbox.get_first_child() is None:
-            row = Adw.ActionRow(_title="All voices are already installed")
-            listbox.append(row)
-
-        scrolled.set_child(listbox)
-        main_box.append(scrolled)
-        dialog.set_content(main_box)
+            status_page = Adw.StatusPage(
+                title = _("All Voices Downloaded"),
+                description = _("No additional voices available"),
+                icon_name = "folder-download-symbolic")
+            toolbar_view.set_content(status_page)
+        else:
+            scrolled.set_child(listbox)
+            toolbar_view.set_content(scrolled)
+        
+        dialog.set_content(toolbar_view)
         dialog.present()
 
     def _show_voice_delete_dialog(self):
         dialog = Adw.Window(
             transient_for=self,
             modal=True,
-            title="",  # Leerer Titel verhindert doppelte Anzeige
             default_width=500,
-            default_height=300,
-            deletable=True  # X-Button aktivieren
+            default_height=500
         )
 
-        # Hauptcontainer mit HeaderBar
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        toolbar_view = Adw.ToolbarView()
 
-        # Custom HeaderBar ohne doppelte Titelleiste
         header_bar = Adw.HeaderBar()
         title = Adw.WindowTitle(title=_("Remove Voices"))
         header_bar.set_title_widget(title)
-        main_box.append(header_bar)
+        toolbar_view.add_top_bar(header_bar)
 
-        # Scrollbereich für die Liste
+        # Scrollview with list of voices
         scrolled = Gtk.ScrolledWindow(vexpand=True)
         listbox = Gtk.ListBox(selection_mode=Gtk.SelectionMode.NONE,
                             css_classes=["boxed-list"],
-                            margin_top=18,
+                            margin_top=12,
                             margin_bottom=18,
-                            margin_start=12,
-                            margin_end=12,
+                            margin_start=18,
+                            margin_end=18,
                             valign="GTK_ALIGN_START")
 
         # installierte Stimmen anzeigen
@@ -340,13 +335,22 @@ class ParoluWindow(Adw.ApplicationWindow):
             row.add_suffix(btn)
             listbox.append(row)
 
+        # if listbox.get_first_child() is None:
+        #     row = Adw.ActionRow(title=_("There are no installed voices for this language"))
+        #     listbox.append(row)
+            
+        # Show status page if there are no voices to remove, otherwise show list of voices
         if listbox.get_first_child() is None:
-            row = Adw.ActionRow(title=_("There are no installed voices for this language"))
-            listbox.append(row)
+            status_page = Adw.StatusPage(
+                title = _("No Installed Voices"),
+                description = _("There are no voices to remove for this language"),
+                icon_name = "folder-download-symbolic")
+            toolbar_view.set_content(status_page)
+        else:
+            scrolled.set_child(listbox)
+            toolbar_view.set_content(scrolled)
 
-        scrolled.set_child(listbox)
-        main_box.append(scrolled)
-        dialog.set_content(main_box)
+        dialog.set_content(toolbar_view)
         dialog.present()
 
     def _fetch_available_voices(self):
@@ -469,14 +473,14 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         # UI-Elemente vorbereiten
         btn.set_sensitive(False)
-        btn.set_label(_("Installing..."))
+        btn.set_label(_("Installing"))
 
         # Fortschrittsanzeige holen (aus self.download_progress)
         progress = self.download_progress.get(voice_id)
         if progress:
             GLib.idle_add(progress.set_visible, True)
             GLib.idle_add(progress.set_fraction, 0.0)
-            GLib.idle_add(progress.set_text, "Vorbereitung... 0%")
+            GLib.idle_add(progress.set_text, "Preparing 0%")
 
         # Callbacks für Fortschritt
         def on_progress(downloaded, total_size):
@@ -491,7 +495,7 @@ class ParoluWindow(Adw.ApplicationWindow):
 
         def on_complete():
             if progress:
-                GLib.idle_add(progress.set_text, _("Installation completed"))
+                GLib.idle_add(progress.set_text, _("Installation complete"))
                 GLib.idle_add(progress.set_fraction, 1.0)
 
             GLib.idle_add(btn.set_label, _("Installed"))
@@ -502,11 +506,11 @@ class ParoluWindow(Adw.ApplicationWindow):
             GLib.timeout_add_seconds(3, dialog.destroy)
 
         def on_error(error):
-            print(f"Download fehlgeschlagen: {error}")
-            GLib.idle_add(btn.set_label, "Erneut versuchen")
+            print(f"Download failed: {error}")
+            GLib.idle_add(btn.set_label, "Try Again")
             GLib.idle_add(btn.set_sensitive, True)
             if progress:
-                GLib.idle_add(progress.set_text, f"Fehler: {str(error)}")
+                GLib.idle_add(progress.set_text, f"Error: {str(error)}")
                 GLib.idle_add(progress.get_style_context().add_class, "error")
 
         # Download-Thread
@@ -552,10 +556,10 @@ class ParoluWindow(Adw.ApplicationWindow):
                         # Erfolgsmeldung in neuem Dialog
                         success_dialog = Adw.MessageDialog(
                             transient_for=parent_window,
-                            heading="Voice deleted",
+                            heading="Voice Deleted",
                             body=f"The voice '{voice_id}' was deleted successfully"
                         )
-                        success_dialog.add_response("ok", "OK")
+                        success_dialog.add_response("ok", "Close")
                         success_dialog.connect("response", lambda *_: (
                             parent_window.destroy(),
                             self._update_voice_chooser(self.lang_code)
@@ -576,7 +580,7 @@ class ParoluWindow(Adw.ApplicationWindow):
                         heading="Deletion failed",
                         body=f"Fehler: {str(e)}"
                     )
-                    error_dialog.add_response("ok", "OK")
+                    error_dialog.add_response("ok", "Close")
                     error_dialog.present()
             else:
                 # Bei Abbruch Button zurücksetzen
