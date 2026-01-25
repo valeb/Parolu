@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parolu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-05 14:37+0200\n"
+"POT-Creation-Date: 2026-01-25 19:15+0100\n"
 "PO-Revision-Date: 2025-09-05 14:37+0200\n"
 "Last-Translator: Tobias Bernard <tbernard@gnome.org>\n"
 "Language-Team: German\n"
@@ -19,72 +19,78 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 48.0\n"
 
-#: src/window.ui:19
+#: src/window.ui:16
 msgid "Open Text File"
 msgstr "Textdatei öffnen"
 
-#: src/window.ui:26
+#: src/window.ui:23
 msgid "Save Text to File"
 msgstr "Textdatei speichern"
 
-#: src/window.ui:34
+#: src/window.ui:31
 msgid "Menu"
 msgstr "Menü"
 
-#: src/window.ui:52
+#: src/window.ui:59
 msgid "Choose Language"
 msgstr "Sprache wählen"
 
-#: src/window.ui:71
+#: src/window.ui:79
 msgid "Choose Voice"
 msgstr "Stimme wählen"
 
-#: src/window.ui:78
+#: src/window.ui:99
 msgid "Adjust Pitch"
 msgstr "Stimmlage anpassen"
 
-#: src/window.ui:140
+#: src/window.ui:166
 msgid "Adjust Speed"
 msgstr "Geschwindigkeit anpassen"
 
-#: src/window.ui:203
-msgid "Read Text"
-msgstr "Text vorlesen"
-
-#: src/window.ui:210
+#: src/window.ui:245
 msgid "Save Audio to File"
 msgstr "Audiodatei speichern"
 
-#: src/window.ui:239
+#: src/window.ui:254
+msgid "Read Text"
+msgstr "Text vorlesen"
+
+#: src/window.ui:293
 msgid "_Keyboard Shortcuts"
 msgstr "Tastenkürzel"
 
-#: src/window.ui:243
+#: src/window.ui:297
 msgid "_About Parolu"
 msgstr "Über Parolu"
 
-#: data/im.bernard.Parolu.desktop.in:3 data/im.bernard.Parolu.metainfo.xml.in:4
+#: data/im.bernard.Parolu.desktop.in:3
+#: data/im.bernard.Parolu.metainfo.xml.in:10
 msgid "Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:5
-msgid "Read text out aloud"
+#: data/im.bernard.Parolu.desktop.in:4
+#: data/im.bernard.Parolu.metainfo.xml.in:11
+#: data/im.bernard.Parolu.metainfo.xml.in:51
+#, fuzzy
+msgid "Read text out loud"
 msgstr "Text vorlesen"
 
-#: data/im.bernard.Parolu.metainfo.xml.in:9
-msgid "Bernard"
+#: data/im.bernard.Parolu.metainfo.xml.in:7
+msgid "Walter Bernard"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:12
+#: data/im.bernard.Parolu.metainfo.xml.in:14
+#, fuzzy
 msgid ""
 "Parolu allows you to generate audio from text using different voices. This "
-"happens exclusively offline and on your device, which is great for privacy."
+"happens exclusively offline on your device, your text is never sent to any "
+"third parties."
 msgstr ""
-"Parlu erlaubt es, aus einem geschriebenen Text Audio zu generieren. "
+"Parolu erlaubt es, aus einem geschriebenen Text Audio zu generieren. "
 "Verschiedene Stimmen in mehreren Sprachen stehen zur Auswahl. Dies passiert "
-"ausschließlich offline, um deine Privatsphäre zu schützen."
+"ausschließlich offline, dein Text wird nicht mit Dritten geteilt."
 
-#: data/im.bernard.Parolu.metainfo.xml.in:16
+#: data/im.bernard.Parolu.metainfo.xml.in:18
 msgid ""
 "It's built on the Piper synthesizer library and supports voices for "
 "different languages including German, Italian, French, Spanish, and even "
@@ -94,54 +100,73 @@ msgstr ""
 "unterstützt verschieden Sprachen, z.B. Deutsch, Italienisch, Französisch, "
 "Spanisch, und sogar Esperanto!"
 
-#: data/im.bernard.Parolu.metainfo.xml.in:36
+#: data/im.bernard.Parolu.metainfo.xml.in:58
 msgid "Initial release"
 msgstr "Erste Version"
 
-#: src/window.py:123
-msgid "Synchronizing"
-msgstr "Synchronisierung"
-
-#. Label mit Ausrichtung
-#: src/window.py:138
-msgid "Please wait..."
-msgstr "Bitte warten..."
+#: src/window.py:135
+msgid "Loading"
+msgstr "Laden"
 
 #. print ('Namen der Stimme voice[name]  = ', voice['name'])
 #. für Esperanto gibt es aktuell keine Stimmen
-#: src/window.py:211
-msgid "Download Voice…"
-msgstr "Stimme herunterladen..."
+#: src/window.py:218
+#, fuzzy
+msgid "Download Voices…"
+msgstr "Stimme herunterladen…"
 
-#: src/window.py:212
-msgid "Delete Voice…"
-msgstr "Stimme löschen..."
+#: src/window.py:219
+#, fuzzy
+msgid "Delete Voices…"
+msgstr "Stimme löschen…"
 
-#: src/window.py:232
+#: src/window.py:235
 msgid "Download Voices"
 msgstr "Stimmen herunterladen"
 
-#: src/window.py:297
+#: src/window.py:284
+msgid "All Voices Downloaded"
+msgstr "Alle Stimmen heruntergeladen"
+
+#: src/window.py:285
+msgid "No additional voices available"
+msgstr "Keine weiteren Stimmen verfügbar"
+
+#: src/window.py:306
 msgid "Remove Voices"
 msgstr "Stimmen entfernen"
 
 #. Löschen-Button
-#: src/window.py:315
+#: src/window.py:328
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/window.py:326
-msgid "There are no installed voices for this language"
+#: src/window.py:345
+#, fuzzy
+msgid "No Installed Voices"
+msgstr "Keine Stimmen installiert"
+
+#: src/window.py:346
+#, fuzzy
+msgid "There are no voices to remove for this language"
 msgstr "Keine installierten Stimmen für diese Sprache"
 
-#: src/window.py:454
-msgid "Installing..."
-msgstr "Installiert..."
-
 #: src/window.py:476
-msgid "Installation completed"
+#, fuzzy
+msgid "Installing"
+msgstr "Installiert"
+
+#: src/window.py:498
+#, fuzzy
+msgid "Installation complete"
 msgstr "Installation vollständig"
 
-#: src/window.py:479
+#: src/window.py:501
 msgid "Installed"
 msgstr "Installiert"
+
+#~ msgid "Synchronizing"
+#~ msgstr "Synchronisierung"
+
+#~ msgid "Please wait..."
+#~ msgstr "Bitte warten..."

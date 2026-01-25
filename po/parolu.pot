@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parolu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-05 14:37+0200\n"
+"POT-Creation-Date: 2026-01-25 19:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,123 +17,134 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/window.ui:19
+#: src/window.ui:16
 msgid "Open Text File"
 msgstr ""
 
-#: src/window.ui:26
+#: src/window.ui:23
 msgid "Save Text to File"
 msgstr ""
 
-#: src/window.ui:34
+#: src/window.ui:31
 msgid "Menu"
 msgstr ""
 
-#: src/window.ui:52
+#: src/window.ui:59
 msgid "Choose Language"
 msgstr ""
 
-#: src/window.ui:71
+#: src/window.ui:79
 msgid "Choose Voice"
 msgstr ""
 
-#: src/window.ui:78
+#: src/window.ui:99
 msgid "Adjust Pitch"
 msgstr ""
 
-#: src/window.ui:140
+#: src/window.ui:166
 msgid "Adjust Speed"
 msgstr ""
 
-#: src/window.ui:203
-msgid "Read Text"
-msgstr ""
-
-#: src/window.ui:210
+#: src/window.ui:245
 msgid "Save Audio to File"
 msgstr ""
 
-#: src/window.ui:239
+#: src/window.ui:254
+msgid "Read Text"
+msgstr ""
+
+#: src/window.ui:293
 msgid "_Keyboard Shortcuts"
 msgstr ""
 
-#: src/window.ui:243
+#: src/window.ui:297
 msgid "_About Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.desktop.in:3 data/im.bernard.Parolu.metainfo.xml.in:4
+#: data/im.bernard.Parolu.desktop.in:3
+#: data/im.bernard.Parolu.metainfo.xml.in:10
 msgid "Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:5
-msgid "Read text out aloud"
+#: data/im.bernard.Parolu.desktop.in:4
+#: data/im.bernard.Parolu.metainfo.xml.in:11
+#: data/im.bernard.Parolu.metainfo.xml.in:51
+msgid "Read text out loud"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:9
-msgid "Bernard"
+#: data/im.bernard.Parolu.metainfo.xml.in:7
+msgid "Walter Bernard"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:12
+#: data/im.bernard.Parolu.metainfo.xml.in:14
 msgid ""
 "Parolu allows you to generate audio from text using different voices. This "
-"happens exclusively offline and on your device, which is great for privacy."
+"happens exclusively offline on your device, your text is never sent to any "
+"third parties."
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:16
+#: data/im.bernard.Parolu.metainfo.xml.in:18
 msgid ""
 "It's built on the Piper synthesizer library and supports voices for "
 "different languages including German, Italian, French, Spanish, and even "
 "Esperanto!"
 msgstr ""
 
-#: data/im.bernard.Parolu.metainfo.xml.in:36
+#: data/im.bernard.Parolu.metainfo.xml.in:58
 msgid "Initial release"
 msgstr ""
 
-#: src/window.py:123
-msgid "Synchronizing"
-msgstr ""
-
-#. Label mit Ausrichtung
-#: src/window.py:138
-msgid "Please wait..."
+#: src/window.py:135
+msgid "Loading"
 msgstr ""
 
 #. print ('Namen der Stimme voice[name]  = ', voice['name'])
 #. für Esperanto gibt es aktuell keine Stimmen
-#: src/window.py:211
-msgid "Download Voice…"
+#: src/window.py:218
+msgid "Download Voices…"
 msgstr ""
 
-#: src/window.py:212
-msgid "Delete Voice…"
+#: src/window.py:219
+msgid "Delete Voices…"
 msgstr ""
 
-#: src/window.py:232
+#: src/window.py:235
 msgid "Download Voices"
 msgstr ""
 
-#: src/window.py:297
+#: src/window.py:284
+msgid "All Voices Downloaded"
+msgstr ""
+
+#: src/window.py:285
+msgid "No additional voices available"
+msgstr ""
+
+#: src/window.py:306
 msgid "Remove Voices"
 msgstr ""
 
 #. Löschen-Button
-#: src/window.py:315
+#: src/window.py:328
 msgid "Delete"
 msgstr ""
 
-#: src/window.py:326
-msgid "There are no installed voices for this language"
+#: src/window.py:345
+msgid "No Installed Voices"
 msgstr ""
 
-#: src/window.py:454
-msgid "Installing..."
+#: src/window.py:346
+msgid "There are no voices to remove for this language"
 msgstr ""
 
 #: src/window.py:476
-msgid "Installation completed"
+msgid "Installing"
 msgstr ""
 
-#: src/window.py:479
+#: src/window.py:498
+msgid "Installation complete"
+msgstr ""
+
+#: src/window.py:501
 msgid "Installed"
 msgstr ""
