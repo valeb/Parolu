@@ -5,6 +5,7 @@
     "sdk": "org.gnome.Sdk",
     "command": "parolu",
     "finish-args": [
+        "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
@@ -127,15 +128,6 @@
         {
             "name": "piper",
             "buildsystem": "cmake-ninja",
-            "build-options": {
-                "env": {
-                    "PKG_CONFIG_PATH": "/app/lib/pkgconfig",
-                    "CMAKE_PREFIX_PATH": "/app",
-                    "LD_LIBRARY_PATH": "/app/lib",
-                    "CPLUS_INCLUDE_PATH": "/app/include/piper-phonemize:/app/include",
-                    "C_INCLUDE_PATH": "/app/include/piper-phonemize:/app/include"
-                }
-            },
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
