@@ -40,6 +40,13 @@ if display:
     icon_theme = Gtk.IconTheme.get_for_display(display)
     icon_theme.add_search_path("/app/share/icons")
 
+def check_internet_connection():
+    try:
+        response = requests.get("https://www.google.com/", timeout=5)
+        return True
+    except:
+        return False
+
 @Gtk.Template(resource_path='/im/bernard/Parolu/window.ui')
 class ParoluWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ParoluWindow'
@@ -246,6 +253,17 @@ class ParoluWindow(Adw.ApplicationWindow):
                             margin_end=18,
                             valign="GTK_ALIGN_START")
 
+        # Check network connection
+        if not(check_internet_connection()):
+            status_page = Adw.StatusPage(
+                title = _("No Network Connection"),
+                description = _("Cound not fetch available voices"),
+                icon_name = "folder-download-symbolic")
+            toolbar_view.set_content(status_page)
+            dialog.set_content(toolbar_view)
+            dialog.present()
+            return
+
         # Load and filter voices
         available_voices = self._fetch_available_voices()
         installed_voices = self.voicemanager.get_installed_voices(self.lang_code)
@@ -368,23 +386,11 @@ class ParoluWindow(Adw.ApplicationWindow):
             # print ('### jetzt rufe ich aus fetch_available parse_voices auf für  ', self.lang_code)
             voices = self._parse_voices_md(response.text, self.lang_code)
 
-            #3. Cache die Stimmen lokal
-            cache_dir = os.path.join(GLib.get_user_cache_dir(), "parolu")
-            os.makedirs(cache_dir, exist_ok=True)
-
-            cache_file = os.path.join(cache_dir, "voices_cache.json")
-            with open(cache_file, 'w') as f:
-                json.dump({
-                    'timestamp': time.time(),
-                    'voices': voices,
-                    'lang': self.lang_code
-                }, f)
-
             return voices
 
         except (requests.RequestException, json.JSONDecodeError) as e:
-            print(f"Netzwerkfehler: {e}. Versuche Cache...")
-            return self._load_cached_voices(lang_code)
+
+            return []
 
     def _parse_voices_md(self, md_text, lang_code):
         """Parst das aktuelle Piper-Voices Markdown-Format"""
@@ -440,31 +446,6 @@ class ParoluWindow(Adw.ApplicationWindow):
         # print ('##### voices aus parse', voices)
 
         return voices or [{'id': f"{lang_code}_default", 'name': "Default Voice"}]
-
-    def _load_cached_voices(self, lang_code):
-        """Lädt zwischengespeicherte Stimmen falls Online-Laden fehlschlägt"""
-        cache_file = os.path.join(
-            GLib.get_user_cache_dir(),
-            "parolu",
-            "voices_cache.json"
-        )
-
-        if os.path.exists(cache_file):
-            try:
-                with open(cache_file, 'r') as f:
-                    data = json.load(f)
-                    # Nur zurückgeben wenn gleiche Sprache oder keine Sprache gefiltert
-                    if not lang_code or data.get('lang') == lang_code:
-                        return data['voices']
-            except Exception as e:
-                print(f"Cache-Fehler: {e}")
-
-        # Fallback-Stimme
-        return [{
-            'id': f"{lang_code}_default" if lang_code else "default",
-            'name': "Default Voice",
-            'quality': "medium"
-        }]
 
     def _on_voice_selected(self, btn, voice_id, model_url, config_url, dialog):
         """Installiert die ausgewählte Stimme mit Fortschrittsanzeige"""

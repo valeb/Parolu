@@ -80,10 +80,6 @@
                 "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
                 "-DBUILD_SHARED_LIBS=ON"
             ],
-            "build-commands": [
-                "cmake --install . --prefix=/app",
-                "ln -sf /app/lib/libpiper_phonemize.so.1 /app/lib/libpiper_phonemize.so"
-            ],
             "sources": [
                 {
                     "type": "archive",
