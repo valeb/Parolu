@@ -47,8 +47,6 @@ def check_internet_connection():
     except:
         return False
 
-
-
 @Gtk.Template(resource_path='/im/bernard/Parolu/window.ui')
 class ParoluWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ParoluWindow'
