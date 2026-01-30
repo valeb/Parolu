@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parolu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 19:15+0100\n"
+"POT-Creation-Date: 2026-01-30 22:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,12 +61,12 @@ msgstr ""
 msgid "_About Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.desktop.in:3
+#: data/im.bernard.Parolu.desktop.in:2
 #: data/im.bernard.Parolu.metainfo.xml.in:10
 msgid "Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.desktop.in:4
+#: data/im.bernard.Parolu.desktop.in:3
 #: data/im.bernard.Parolu.metainfo.xml.in:11
 #: data/im.bernard.Parolu.metainfo.xml.in:51
 msgid "Read text out loud"
@@ -94,57 +94,65 @@ msgstr ""
 msgid "Initial release"
 msgstr ""
 
-#: src/window.py:135
+#: src/window.py:142
 msgid "Loading"
 msgstr ""
 
 #. print ('Namen der Stimme voice[name]  = ', voice['name'])
 #. für Esperanto gibt es aktuell keine Stimmen
-#: src/window.py:218
+#: src/window.py:225
 msgid "Download Voices…"
 msgstr ""
 
-#: src/window.py:219
+#: src/window.py:226
 msgid "Delete Voices…"
 msgstr ""
 
-#: src/window.py:235
+#: src/window.py:242
 msgid "Download Voices"
 msgstr ""
 
-#: src/window.py:284
+#: src/window.py:259
+msgid "No Network Connection"
+msgstr ""
+
+#: src/window.py:260
+msgid "Could not fetch available voices"
+msgstr ""
+
+#: src/window.py:302
 msgid "All Voices Downloaded"
 msgstr ""
 
-#: src/window.py:285
+#: src/window.py:303
 msgid "No additional voices available"
 msgstr ""
 
-#: src/window.py:306
+#: src/window.py:324
 msgid "Remove Voices"
 msgstr ""
 
 #. Löschen-Button
-#: src/window.py:328
+#: src/window.py:346
 msgid "Delete"
 msgstr ""
 
-#: src/window.py:345
+#: src/window.py:363
 msgid "No Installed Voices"
 msgstr ""
 
-#: src/window.py:346
+#: src/window.py:364
 msgid "There are no voices to remove for this language"
 msgstr ""
 
-#: src/window.py:476
+#: src/window.py:457
 msgid "Installing"
 msgstr ""
 
-#: src/window.py:498
+#: src/window.py:479
 msgid "Installation complete"
 msgstr ""
 
-#: src/window.py:501
+#: src/window.py:482
 msgid "Installed"
 msgstr ""

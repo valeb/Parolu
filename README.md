@@ -13,12 +13,12 @@ Bei den anderen Sprachen muss vorher mindestens eine Stimme heruntergeladen werd
 
 ## Updating translation files
 
-Update the `.pot` file when strings in the app change:
+To update the `.pot` file when strings in the app change:
 
 - Open a "Build terminal" in Builder from the + menu in the top left
-- Run `ninja parolu-pot`
+- Run: ninja parolu-pot
 
-Update the individual `.po` files with new strings:
+To update the individual `.po` files with new strings:
 
 - Open a "Build terminal" in Builder from the + menu in the top left
-- Run `ninja parolu-update-po`
+- Run: ninja parolu-update-po

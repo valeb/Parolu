@@ -257,7 +257,7 @@ class ParoluWindow(Adw.ApplicationWindow):
         if not(check_internet_connection()):
             status_page = Adw.StatusPage(
                 title = _("No Network Connection"),
-                description = _("Cound not fetch available voices"),
+                description = _("Could not fetch available voices"),
                 icon_name = "folder-download-symbolic")
             toolbar_view.set_content(status_page)
             dialog.set_content(toolbar_view)
@@ -729,4 +729,5 @@ class ParoluWindow(Adw.ApplicationWindow):
                 self.reader.stop_audio()  # Annahme: dein Reader hat eine stop()-Methode
             self.is_playing = False
             button.set_icon_name("media-playback-start-symbolic")
+
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: parolu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-25 19:15+0100\n"
+"POT-Creation-Date: 2026-01-30 22:12+0100\n"
 "PO-Revision-Date: 2025-09-05 14:37+0200\n"
 "Last-Translator: Tobias Bernard <tbernard@gnome.org>\n"
 "Language-Team: German\n"
@@ -63,12 +63,12 @@ msgstr "Tastenkürzel"
 msgid "_About Parolu"
 msgstr "Über Parolu"
 
-#: data/im.bernard.Parolu.desktop.in:3
+#: data/im.bernard.Parolu.desktop.in:2
 #: data/im.bernard.Parolu.metainfo.xml.in:10
 msgid "Parolu"
 msgstr ""
 
-#: data/im.bernard.Parolu.desktop.in:4
+#: data/im.bernard.Parolu.desktop.in:3
 #: data/im.bernard.Parolu.metainfo.xml.in:11
 #: data/im.bernard.Parolu.metainfo.xml.in:51
 #, fuzzy
@@ -104,64 +104,73 @@ msgstr ""
 msgid "Initial release"
 msgstr "Erste Version"
 
-#: src/window.py:135
+#: src/window.py:142
 msgid "Loading"
 msgstr "Laden"
 
 #. print ('Namen der Stimme voice[name]  = ', voice['name'])
 #. für Esperanto gibt es aktuell keine Stimmen
-#: src/window.py:218
+#: src/window.py:225
 #, fuzzy
 msgid "Download Voices…"
 msgstr "Stimme herunterladen…"
 
-#: src/window.py:219
+#: src/window.py:226
 #, fuzzy
 msgid "Delete Voices…"
 msgstr "Stimme löschen…"
 
-#: src/window.py:235
+#: src/window.py:242
 msgid "Download Voices"
 msgstr "Stimmen herunterladen"
 
-#: src/window.py:284
+#: src/window.py:259
+msgid "No Network Connection"
+msgstr "Keine Internetverbindung"
+
+#: src/window.py:260
+#, fuzzy
+msgid "Could not fetch available voices"
+msgstr "Konnte verfügbare Stimmen nicht laden"
+
+#: src/window.py:302
 msgid "All Voices Downloaded"
 msgstr "Alle Stimmen heruntergeladen"
 
-#: src/window.py:285
+#: src/window.py:303
 msgid "No additional voices available"
 msgstr "Keine weiteren Stimmen verfügbar"
 
-#: src/window.py:306
+#: src/window.py:324
 msgid "Remove Voices"
 msgstr "Stimmen entfernen"
 
 #. Löschen-Button
-#: src/window.py:328
+#: src/window.py:346
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/window.py:345
+#: src/window.py:363
 #, fuzzy
 msgid "No Installed Voices"
 msgstr "Keine Stimmen installiert"
 
-#: src/window.py:346
+#: src/window.py:364
 #, fuzzy
 msgid "There are no voices to remove for this language"
 msgstr "Keine installierten Stimmen für diese Sprache"
 
-#: src/window.py:476
+#: src/window.py:457
 #, fuzzy
 msgid "Installing"
 msgstr "Installiert"
 
-#: src/window.py:498
+#: src/window.py:479
 #, fuzzy
 msgid "Installation complete"
 msgstr "Installation vollständig"
 
-#: src/window.py:501
+#: src/window.py:482
 msgid "Installed"
 msgstr "Installiert"
 
