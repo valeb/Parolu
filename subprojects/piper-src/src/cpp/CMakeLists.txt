@@ -56,5 +56,5 @@ target_include_directories(piper PUBLIC
   /app/include/piper-phonemize
 )
 install(TARGETS piper
-    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/python3.12/site-packages
+    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/python3.13/site-packages
 )
