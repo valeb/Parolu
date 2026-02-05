@@ -1,0 +1,8 @@
+python3-meson-python
+python3-numpy
+certifi
+charset_normalizer
+idna
+requests
+urllib3
+piper-tts
