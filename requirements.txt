@@ -1,5 +1,5 @@
-python3-meson-python
-python3-numpy
+meson-python
+numpy
 certifi
 charset_normalizer
 idna

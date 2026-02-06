@@ -30,5 +30,5 @@ Dependencies are in `requirements.txt`, which is the source of truth for `python
 1. Update `requirements.txt`
 2. Set up [flatpak-pip-generator](https://github.com/flatpak/flatpak-builder-tools/tree/master/pip) (on GNOME OS this can be done on the host, no toolbox needed):
     - Install dependency `pip3 install --user requirements-parser`
-    - Copy flatpak-pip-generator.py into the repo
+    - Copy `flatpak-pip-generator.py` into the repo
 3. Run `python3 flatpak-pip-generator.py --runtime='org.gnome.Sdk//49' --requirements-file='requirements.txt' --output pypi-dependencies`
