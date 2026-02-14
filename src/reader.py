@@ -10,7 +10,7 @@ Gst.init(None)
 import array
 import time
 
-import piper
+from piper import PiperVoice, SynthesisConfig
 
 import math
 import tempfile
@@ -130,22 +130,28 @@ class Reader():
                 print("❌ Modell oder Konfiguration fehlen")
                 return
 
-            # print(f"Starte Synthese mit: {model_path} (Existiert: {os.path.exists(model_path)})")
+            #print(f"Starte Synthese mit: {model_path} (Existiert: {os.path.exists(model_path)})")
 
-            self.p = piper.piper_api(model_path, config_path)   # Sythesizer
+            # We could also enable cude: with `use_cuda=True`
+            self.p = PiperVoice.load(model_path, config_path)
 
-            lenght_scale = 0.8/self.speed  # verändert die Geschwindigkeit
+            length_scale = 0.8/self.speed  # verändert die Geschwindigkeit
 
-            samples = self.p.text_to_audio(text, lenght_scale)
+            syn_config = SynthesisConfig(
+	        length_scale=length_scale
+            )
 
             # wav Data erstellen
             target_rate = pitch*19000   # verändert die Stimmlage
-            wav_data = self._samples_to_wav(samples, target_rate)
 
             # Temporäre Datei erstellen
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
-                f.write(wav_data)
-                self.temp_path = f.name
+                with wave.open(f, "wb") as wav:
+                    wav.setnchannels(1)
+                    wav.setsampwidth(2)  # 16-bit
+                    wav.setframerate(target_rate)  # ändert Ausgabefrequenzan
+                    self.p.synthesize_wav(text, wav, syn_config=syn_config)
+                    self.temp_path = f.name
 
             # Dialog schließen VOR Wiedergabe
             if hasattr(self, 'window') and self.window:
@@ -276,15 +282,3 @@ class Reader():
             for i in range(22050)
         ])
         self._play_raw(samples, 22050)
-
-    def _samples_to_wav(self, samples, target_rate=22050):
-        audio = np.array(samples, dtype=np.int16)
-        with io.BytesIO() as wav_buffer:
-            with wave.open(wav_buffer, 'wb') as wav:
-                wav.setnchannels(1)
-                wav.setsampwidth(2)  # 16-bit
-                wav.setframerate(target_rate)  # ändert Ausgabefrequenzan
-                wav.writeframes(audio.tobytes())
-            return wav_buffer.getvalue()
-
-
