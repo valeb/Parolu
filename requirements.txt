@@ -1,8 +1,4 @@
 meson-python
-numpy
-certifi
-charset_normalizer
-idna
-requests
-urllib3
+scikit-build
 piper-tts
+requests
