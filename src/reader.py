@@ -142,14 +142,13 @@ class Reader():
             )
 
             # wav Data erstellen
-            target_rate = pitch*19000   # verändert die Stimmlage
+            self.p.config.sample_rate = pitch*19000   # verändert die Stimmlage
 
             # Temporäre Datei erstellen
             with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
                 with wave.open(f, "wb") as wav:
                     wav.setnchannels(1)
                     wav.setsampwidth(2)  # 16-bit
-                    wav.setframerate(target_rate)  # ändert Ausgabefrequenzan
                     self.p.synthesize_wav(text, wav, syn_config=syn_config)
                     self.temp_path = f.name
 
