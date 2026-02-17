@@ -40,10 +40,6 @@ if display:
     icon_theme = Gtk.IconTheme.get_for_display(display)
     icon_theme.add_search_path("/app/share/icons")
 
-def check_internet_connection():
-    network_monitor = Gio.NetworkMonitor.get_default()
-    return network_monitor.props.network_available
-
 @Gtk.Template(resource_path='/im/bernard/Parolu/window.ui')
 class ParoluWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'ParoluWindow'
@@ -68,6 +64,7 @@ class ParoluWindow(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.network_monitor = Gio.NetworkMonitor.get_default()
         self.is_playing = False
 
         # die Aktion zum Öffnen einer Datei wird hinzugefügt
@@ -251,7 +248,7 @@ class ParoluWindow(Adw.ApplicationWindow):
                             valign="GTK_ALIGN_START")
 
         # Check network connection
-        if not(check_internet_connection()):
+        if not(self.network_monitor.get_network_available()):
             status_page = Adw.StatusPage(
                 title = _("No Network Connection"),
                 description = _("Could not fetch available voices"),
