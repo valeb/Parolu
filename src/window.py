@@ -41,11 +41,8 @@ if display:
     icon_theme.add_search_path("/app/share/icons")
 
 def check_internet_connection():
-    try:
-        response = requests.get("https://www.google.com/", timeout=5)
-        return True
-    except:
-        return False
+    network_monitor = Gio.NetworkMonitor.get_default()
+    return network_monitor.props.network_available
 
 @Gtk.Template(resource_path='/im/bernard/Parolu/window.ui')
 class ParoluWindow(Adw.ApplicationWindow):
