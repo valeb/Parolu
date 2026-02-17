@@ -72,11 +72,6 @@
             "name": "parolu",
             "builddir": true,
             "buildsystem": "meson",
-            "build-options": {
-                "env": {
-                    "PYTHONPATH": "/app/lib:/app/lib/python3.13/site-packages"
-                }
-            },
             "sources": [
                 {
                     "type": "dir",
