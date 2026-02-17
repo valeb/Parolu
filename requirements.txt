@@ -1,0 +1,4 @@
+meson-python
+scikit-build
+piper-tts
+requests

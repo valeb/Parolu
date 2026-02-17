@@ -34,8 +34,5 @@ parolu_sources = [
   'pipervoice.py',
   'vocxpo.py',
 ]
-dependencies = [
-  piper_dep
-]
 
 install_data(parolu_sources, install_dir: moduledir)
