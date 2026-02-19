@@ -53,6 +53,11 @@
 	</screenshots>
 
   <releases>
+    <release version="0.1.2" date="2026-02-19">
+      <description>
+        <p>Minor release with build system fixes</p>
+      </description>
+    </release>
     <release version="0.1.1" date="2026-02-18">
       <description>
         <p>Minor release with mostly internal improvements to the code</p>

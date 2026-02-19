@@ -55,7 +55,7 @@ class ParoluApplication(Adw.Application):
                                 application_name='Parolu',
                                 application_icon='im.bernard.Parolu',
                                 developer_name='Walter Bernard',
-                                version='0.1.1',
+                                version='0.1.2',
                                 developers=['Walter Bernard'],
                                 copyright='© 2025 Walter Bernard')
         about.present()
@@ -88,4 +88,4 @@ def main(version):
     return result
 
 if __name__ == "__main__":
-    main("0.1.1")
+    main("0.1.2")

@@ -24,7 +24,6 @@ class VoiceManager:
 
         if os.path.exists(lang_dir): # z.B. /home/walter/.var/app/im.bernard.Parolu/data/parolu/models/de
             for voice_id in os.listdir(lang_dir): # die Stimmdateien einer bestimmten Sprache
-                print ('voice_id = ', voice_id)
                 voice_path = os.path.join(lang_dir, voice_id)
                 if os.path.isdir(voice_path):  # wenn voice_path ein Ordner ist
                     if self._is_valid_voice(voice_path, voice_id):

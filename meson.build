@@ -1,5 +1,5 @@
 project('parolu', ['c', 'cpp'],
-  version: '0.1.1',
+  version: '0.1.2',
   meson_version: '>= 0.63.0',
   default_options: ['warning_level=2', 'cpp_std=c++17']
 )
