@@ -21,7 +21,12 @@ class VoiceManager:
         # print ('Stimmenordner der Sprache  ', lang_dir)
 
         if lang_code == "eo": # wenn die Sprache Esperanto ist kommen die Stimmen aus app/share/piper/eo
-            path = "/app/share/piper/eo"
+            path = os.path.join(
+                GLib.get_user_data_dir(),
+                "parolu",
+                "models",
+                "eo"
+            )
 
             for voice_id in os.listdir(path): # die Stimmdateien von eo
 
