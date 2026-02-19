@@ -23,11 +23,6 @@
         "*.la",
         "*.a"
     ],
-    "build-options" : {
-        "env" : {
-            "ONNX_ROOT" : "/app/onnx_root"
-        }
-    },
     "modules": [
         "pip-dependencies.json",
         {
